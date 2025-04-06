@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar components
 import { createFeedback } from "@/lib/actions/general.action";
+import { AgentProps } from "@/types"; // Import AgentProps
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -27,12 +29,18 @@ const Agent = ({
   feedbackId,
   type,
   questions,
-}: AgentProps) => {
+  userPhotoUrl, // Add userPhotoUrl prop
+}: AgentProps & { userPhotoUrl?: string | null }) => { // Add prop to component signature
   const router = useRouter();
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [lastMessage, setLastMessage] = useState<string>("");
+
+  // Add refs for tracking silence
+  const silenceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastSpeechTimeRef = useRef<number>(0);
+  const SILENCE_THRESHOLD = 3000; // 3 seconds before considering silence as intentional pause
 
   useEffect(() => {
     const onCallStart = () => {
@@ -47,17 +55,60 @@ const Agent = ({
       if (message.type === "transcript" && message.transcriptType === "final") {
         const newMessage = { role: message.role, content: message.transcript };
         setMessages((prev) => [...prev, newMessage]);
+
+        // Reset silence detection when a message is received
+        lastSpeechTimeRef.current = Date.now();
+
+        // Check for end-of-call keywords
+        const transcriptLower = message.transcript.toLowerCase();
+        const endKeywords = [
+          "thank you", "thanks", "goodbye", "bye", "finished", 
+          "that's all", "end the call", "end the meeting"
+        ];
+        
+        // Check if the current call status is ACTIVE before disconnecting
+        // This prevents potential issues if a keyword appears after the call has already ended
+        if (callStatus === CallStatus.ACTIVE && endKeywords.some(keyword => transcriptLower.includes(keyword))) {
+          console.log("End keyword detected, disconnecting call...");
+          handleDisconnect(); // Call the disconnect function
+        }
       }
     };
 
     const onSpeechStart = () => {
       console.log("speech start");
       setIsSpeaking(true);
+      
+      // Clear any existing timeout when speech starts
+      if (silenceTimeoutRef.current) {
+        clearTimeout(silenceTimeoutRef.current);
+        silenceTimeoutRef.current = null;
+      }
+      
+      // Update the last speech time
+      lastSpeechTimeRef.current = Date.now();
     };
 
     const onSpeechEnd = () => {
       console.log("speech end");
       setIsSpeaking(false);
+      
+      // Start a new timeout for silence detection
+      // This prevents interruptions during small 2-3 second pauses
+      if (silenceTimeoutRef.current) {
+        clearTimeout(silenceTimeoutRef.current);
+      }
+      
+      silenceTimeoutRef.current = setTimeout(() => {
+        const silenceDuration = Date.now() - lastSpeechTimeRef.current;
+        if (silenceDuration > SILENCE_THRESHOLD) {
+          console.log(`Detected silence for ${silenceDuration}ms, allowing AI to respond`);
+          // The AI can respond now (vapi will handle this automatically)
+        } else {
+          console.log(`Short pause detected (${silenceDuration}ms), waiting for more speech`);
+          // Continue listening for more speech
+        }
+      }, SILENCE_THRESHOLD);
     };
 
     const onError = (error: Error) => {
@@ -78,8 +129,13 @@ const Agent = ({
       vapi.off("speech-start", onSpeechStart);
       vapi.off("speech-end", onSpeechEnd);
       vapi.off("error", onError);
+      
+      // Clear timeout on unmount
+      if (silenceTimeoutRef.current) {
+        clearTimeout(silenceTimeoutRef.current);
+      }
     };
-  }, []);
+  }, [callStatus]);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -126,14 +182,16 @@ const Agent = ({
     } else {
       let formattedQuestions = "";
       if (questions) {
+        // Add string type to question parameter
         formattedQuestions = questions
-          .map((question) => `- ${question}`)
+          .map((question: string) => `- ${question}`)
           .join("\n");
       }
 
       await vapi.start(interviewer, {
         variableValues: {
           questions: formattedQuestions,
+          silenceThreshold: SILENCE_THRESHOLD, // Pass silence threshold to the interviewer
         },
       });
     }
@@ -144,9 +202,21 @@ const Agent = ({
     vapi.stop();
   };
 
+  // Determine initials for fallback avatar
+  const getInitials = (name?: string | null) => {
+    if (!name) return "?";
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+  };
+
+
   return (
     <>
-      <div className="call-view">
+      {/* Added vertical margin */}
+      <div className="call-view my-12"> {/* Increased margin */}
         {/* AI Interviewer Card */}
         <div className="card-interviewer">
           <div className="avatar">
@@ -162,16 +232,15 @@ const Agent = ({
           <h3>AI Interviewer</h3>
         </div>
 
-        {/* User Profile Card */}
+        {/* User Profile Card - Use Avatar */}
         <div className="card-border">
           <div className="card-content">
-            <Image
-              src="/user-avatar.jpg"
-              alt="profile-image"
-              width={539}
-              height={539}
-              className="rounded-full object-cover size-[120px]"
-            />
+             <Avatar className="h-[120px] w-[120px]"> {/* Use Avatar component */}
+              <AvatarImage src={userPhotoUrl ?? undefined} alt={userName ?? "User"} />
+              <AvatarFallback className="bg-gray-600 text-white text-4xl"> {/* Style fallback */}
+                {getInitials(userName)}
+              </AvatarFallback>
+            </Avatar>
             <h3>{userName}</h3>
           </div>
         </div>
@@ -193,7 +262,8 @@ const Agent = ({
         </div>
       )}
 
-      <div className="w-full flex justify-center">
+      {/* Added vertical margin */}
+      <div className="w-full flex justify-center my-12"> {/* Increased margin */}
         {callStatus !== "ACTIVE" ? (
           <button className="relative btn-call" onClick={() => handleCall()}>
             <span

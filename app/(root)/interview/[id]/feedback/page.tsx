@@ -13,19 +13,33 @@ const Feedback = async ({ params }: RouteParams) => {
   const { id } = await params;
   const user = await getCurrentUser();
 
+  // Redirect if user is not found
+  if (!user) {
+    redirect("/sign-in");
+  }
+
   const interview = await getInterviewById(id);
   if (!interview) redirect("/");
 
+  // Use user.id safely
   const feedback = await getFeedbackByInterviewId({
     interviewId: id,
-    userId: user?.id!, // ignore eslint error
+    userId: user.id,
   });
+
+  // Redirect if feedback not found (optional, depends on desired behavior)
+  // if (!feedback) {
+  //   console.log(`Feedback not found for interview ${id}, redirecting.`);
+  //   redirect("/");
+  // }
 
   return (
     <section className="section-feedback">
-      <div className="glass-container animate-fadeIn">
+      {/* Add padding to the glass container */}
+      <div className="glass-container animate-fadeIn p-6 md:p-8 lg:p-10">
         <div className="flex flex-row justify-center">
-          <h1 className="text-4xl font-semibold">
+          {/* Adjusted heading size for responsiveness */}
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-center">
             Feedback on the Interview -{" "}
             <span className="capitalize">{interview.role}</span> Interview
           </h1>

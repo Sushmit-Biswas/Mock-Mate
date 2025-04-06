@@ -1,12 +1,25 @@
 import Image from "next/image";
-import { cn, getTechLogos } from "@/lib/utils";
+import { cn } from "@/lib/utils"; // Removed getTechLogos import
 
-const DisplayTechIcons = async ({ techStack }: TechIconProps) => {
-  const techIcons = await getTechLogos(techStack);
+// Define AND export the expected shape of the icon data
+export interface TechIconData {
+  tech: string;
+  url: string;
+}
+
+// Define the new props interface
+interface DisplayTechIconsProps {
+  icons: TechIconData[];
+}
+
+// Remove async, change prop from techStack to icons
+const DisplayTechIcons = ({ icons }: DisplayTechIconsProps) => {
+  // No need to call getTechLogos here anymore
 
   return (
     <div className="flex flex-row">
-      {techIcons.slice(0, 3).map(({ tech, url }, index) => (
+      {/* Map directly over the passed icons prop */}
+      {icons.slice(0, 3).map(({ tech, url }, index) => (
         <div 
           key={tech}
           className={cn(

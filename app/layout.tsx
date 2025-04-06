@@ -1,4 +1,3 @@
-import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Mona_Sans } from "next/font/google";
 import "./globals.css";
@@ -20,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning={true}>
       <body className={`${monaSans.className} antialiased pattern`}>
         {children}
         {/* <Toaster /> */}  {/* For bottom black toast message*/}

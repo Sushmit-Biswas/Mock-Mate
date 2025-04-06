@@ -163,7 +163,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
         <div className="flex flex-col gap-6 card py-14 px-10">
           <div className="flex flex-row gap-2 justify-center">
             <Image src="/logo.svg" alt="logo" height={32} width={38} />
-            <h2 className="text-primary-100">MockMate</h2>
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent">MockMate</h2>
           </div>
             <h3 className="text-center">AI mock interviews and resume check</h3>
 

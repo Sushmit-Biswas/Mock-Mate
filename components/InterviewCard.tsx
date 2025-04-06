@@ -1,38 +1,54 @@
+"use client";
+
 import dayjs from "dayjs";
 import Link from "next/link";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import DisplayTechIcons from "./DisplayTechIcons";
+import { TechIconData } from "./DisplayTechIcons"; 
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
-import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
+import { Feedback, InterviewCardProps } from "@/types"; // Fixed missing quote
 
-const InterviewCard = async ({
+// Define props including the new feedback prop and icons prop
+interface InterviewCardComponentProps extends Omit<InterviewCardProps, 'techstack'> {
+  feedback: Feedback | null;
+  icons: TechIconData[];
+  userId?: never;
+}
+
+const InterviewCard = ({
   id,
-  userId,
   role,
   type,
-  techstack,
   createdAt,
-}: InterviewCardProps) => {
-    const feedback = userId && id ? await getFeedbackByInterviewId({ interviewId: id, userId }) : null;
-
-    const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
+  feedback,
+  icons,
+}: InterviewCardComponentProps) => {
+  
+  // Corrected normalization logic
+  const normalizedType = /mix/gi.test(type)
+    ? "Mixed"
+    : /behav/gi.test(type)
+    ? "Behavioral"
+    : /tech/gi.test(type)
+    ? "Technical"
+    : "Mixed";
 
   const badgeColor =
     {
-      Behavioral: "bg-light-400",
-      Mixed: "bg-light-600",
-      Technical: "bg-light-800",
-    }[normalizedType] || "bg-light-600";
+    Behavioral: "bg-violet-600",
+    Mixed: "bg-orange-500",
+    Technical: "bg-green-600",
+    }[normalizedType] || "bg-blue-500";
 
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D, YYYY");
 
   return (
-    <div className="card-border w-[360px] max-sm:w-full min-h-96">
+    <div className="card-border w-[380px] max-sm:w-full min-h-96">
       <div className="card-interview">
         <div>
           {/* Type Badge */}
@@ -42,7 +58,7 @@ const InterviewCard = async ({
               badgeColor
             )}
           >
-            <p className="badge-text ">{normalizedType}</p>
+            <p className="badge-text">{normalizedType}</p>
           </div>
 
           {/* Cover Image */}
@@ -82,8 +98,8 @@ const InterviewCard = async ({
           </p>
         </div>
 
-        <div className="flex flex-row justify-between">
-          <DisplayTechIcons techStack={techstack} />
+        <div className="flex flex-row justify-between items-end">
+          <DisplayTechIcons icons={icons} />
 
           <Button className="btn-primary">
             <Link
