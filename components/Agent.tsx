@@ -40,7 +40,7 @@ const Agent = ({
   // Add refs for tracking silence
   const silenceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastSpeechTimeRef = useRef<number>(0);
-  const SILENCE_THRESHOLD = 3000; // 3 seconds before considering silence as intentional pause
+  const SILENCE_THRESHOLD = 4000; // 4 seconds before considering silence as intentional pause
 
   useEffect(() => {
     const onCallStart = () => {
@@ -62,8 +62,8 @@ const Agent = ({
         // Check for end-of-call keywords
         const transcriptLower = message.transcript.toLowerCase();
         const endKeywords = [
-          "goodbye", "bye", "finished", 
-          "that's all", "end the call", "end the meeting"
+          "thank you for the call", "goodbye", "bye", "finished", "feedback", "see you", "good luck",
+          "that's all","end", "end the call", "end the meeting"
         ];
         
         // Check if the current call status is ACTIVE before disconnecting
