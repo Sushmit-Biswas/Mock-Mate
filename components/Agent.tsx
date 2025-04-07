@@ -62,7 +62,7 @@ const Agent = ({
         // Check for end-of-call keywords
         const transcriptLower = message.transcript.toLowerCase();
         const endKeywords = [
-          "thank you", "thanks", "goodbye", "bye", "finished", 
+          "goodbye", "bye", "finished", 
           "that's all", "end the call", "end the meeting"
         ];
         
