@@ -1,0 +1,93 @@
+.card-interview {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  position: relative;
+  overflow: hidden;
+  border-left: 3px solid transparent;
+  animation: appearEffect 0.8s ease-out forwards, subtlePulse 3s infinite alternate 2s;
+}
+
+.card-interview:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card-interview::before {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.card-interview:hover::before {
+  left: 100%;
+  animation: shine 1.5s;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Add appear animation for page load */
+@keyframes appearEffect {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Add a subtle pulse animation that runs after the card appears */
+@keyframes subtlePulse {
+  0% {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.22);
+  }
+}
+
+/* Add border color animation for visual interest */
+.card-interview {
+  border-left: 3px solid transparent;
+  animation: appearEffect 0.8s ease-out forwards, 
+             subtlePulse 3s infinite alternate 2s,
+             borderColorShift 8s infinite 1s;
+}
+
+@keyframes borderColorShift {
+  0% { border-left-color: transparent; }
+  20% { border-left-color: #4285f4; } /* Google Blue */
+  40% { border-left-color: #ea4335; } /* Google Red */
+  60% { border-left-color: #fbbc05; } /* Google Yellow */
+  80% { border-left-color: #34a853; } /* Google Green */
+  100% { border-left-color: transparent; }
+}
+
+/* Add animation delay for staggered appearance if multiple cards */
+.card-interview:nth-child(1) { animation-delay: 0.1s; }
+.card-interview:nth-child(2) { animation-delay: 0.2s; }
+.card-interview:nth-child(3) { animation-delay: 0.3s; }
+.card-interview:nth-child(4) { animation-delay: 0.4s; }
+.card-interview:nth-child(5) { animation-delay: 0.5s; }
+.card-interview:nth-child(6) { animation-delay: 0.6s; }
+
+/* Enhanced click/tap animation */
+.card-interview:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 8px rgba(66, 133, 244, 0.5); /* Blue glow on click */
+  transition: all 0.1s ease-in-out;
+}
