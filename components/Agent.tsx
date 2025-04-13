@@ -9,7 +9,7 @@ import { interviewer } from "@/constants";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createFeedback } from "@/lib/actions/general.action";
 import { AgentProps } from "@/types";
-import { Video, VideoOff } from "lucide-react"; // Add import for camera icons
+import { Video, VideoOff } from "lucide-react"; 
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -194,6 +194,18 @@ const Agent = ({
     vapi.stop();
   };
 
+  // Initialize video element when component mounts
+  useEffect(() => {
+    // Ensure video element is created and ref is attached
+    if (!videoRef.current) {
+      const video = document.createElement('video');
+      video.autoplay = true;
+      video.muted = true;
+      video.playsInline = true;
+      videoRef.current = video;
+    }
+  }, []);
+
   // Function to toggle camera on/off
   const toggleCamera = async () => {
     if (cameraOn) {
@@ -203,37 +215,57 @@ const Agent = ({
         streamRef.current = null;
       }
       setCameraOn(false);
-      setIsCameraLoading(false); // Ensure loading is off when camera is turned off
+      setIsCameraLoading(false);
     } else {
       // Turn on camera
-      setIsCameraLoading(true); // Set loading state
+      setIsCameraLoading(true);
       try {
-        // Use specific constraints
-        const constraints = {
-          video: {
-            width: { ideal: 1280 },
-            height: { ideal: 720 },
-            facingMode: "user" // Explicitly request user-facing camera
-          }
-        };
+        const constraints = { video: true };
+        console.log("Requesting camera with constraints:", constraints);
         const stream = await navigator.mediaDevices.getUserMedia(constraints);
-
-        if (videoRef.current) {
-          // Ensure the video element is ready before setting srcObject
-          videoRef.current.onloadedmetadata = () => {
-             console.log("Video metadata loaded");
-          };
-          videoRef.current.srcObject = stream;
-          // Attempt to play explicitly after setting srcObject, though autoPlay should handle it
-          await videoRef.current.play().catch(playError => {
-            console.error("Error attempting to play video:", playError);
-            // Handle autoplay issues if necessary
-          });
+        console.log("Obtained stream:", stream);
+        
+        if (stream.getVideoTracks().length > 0) {
+          console.log("Stream has active video tracks:", stream.getVideoTracks());
+        } else {
+          console.warn("Stream obtained but has no active video tracks.");
         }
 
-        streamRef.current = stream;
-        setCameraOn(true);
-      } catch (error: unknown) { // Use unknown instead of any
+        // Create video element if it doesn't exist
+        if (!videoRef.current) {
+          console.log("Creating new video element");
+          const video = document.createElement('video');
+          video.autoplay = true;
+          video.muted = true;
+          video.playsInline = true;
+          videoRef.current = video;
+        }
+
+        if (videoRef.current) {
+          console.log("Video ref exists. Setting srcObject.");
+          // Ensure the video element is ready
+          videoRef.current.onloadedmetadata = () => {
+             console.log("Video metadata loaded. Attempting to play...");
+             videoRef.current?.play().then(() => {
+                console.log("Video playback started successfully.");
+             }).catch(playError => {
+                console.error("Error playing video:", playError);
+             });
+          };
+          
+          videoRef.current.onerror = (e) => {
+            console.error("Video element error:", e);
+          };
+          
+          // Set srcObject
+          videoRef.current.srcObject = stream;
+          streamRef.current = stream;
+          setCameraOn(true);
+        } else {
+           console.error("Video ref is still null after creation attempt");
+           throw new Error("Failed to create video element");
+        }
+      } catch (error: unknown) {
         // Improved error handling with type checking
         let errorMessage = "An unknown error occurred";
         if (error instanceof Error) {
@@ -244,7 +276,7 @@ const Agent = ({
         }
         alert(`Failed to access camera: ${errorMessage}. Please check permissions and ensure no other app is using the camera.`);
       } finally {
-        setIsCameraLoading(false); // Unset loading state regardless of success/failure
+        setIsCameraLoading(false);
       }
     }
   };
@@ -292,31 +324,33 @@ const Agent = ({
         <div className="card-border">
           {/* Apply dark-gradient, padding, full height, and flex centering to card-content */}
           <div className="card-content relative dark-gradient rounded-2xl p-6 h-full flex flex-col items-center justify-center overflow-hidden"> {/* Added overflow-hidden */}
-            {/* Video or Avatar */}
-            {cameraOn ? (
-              <div className="w-full h-full relative flex items-center justify-center"> {/* Container for video and loading */}
-                {isCameraLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 z-20 rounded-lg"> {/* Loading indicator with higher z-index */}
-                    {/* You can replace this with a spinner component if available */}
-                    <p className="text-white animate-pulse">Initializing Camera...</p>
-                  </div>
+            {/* Always create the video element but hide it when not in use */}
+            <div className={cn(
+              "w-full h-full relative flex items-center justify-center",
+              !cameraOn && "hidden" // Hide when camera is off
+            )}>
+              {isCameraLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 z-30 rounded-lg"> {/* Increased z-index for loader */}
+                  {/* You can replace this with a spinner component if available */}
+                  <p className="text-white animate-pulse">Initializing Camera...</p>
+                </div>
+              )}
+              <video
+                ref={videoRef}
+                autoPlay
+                muted // Keep muted for autoplay
+                playsInline // IMPORTANT for mobile
+                // Add min-height and z-index
+                className={cn(
+                  "w-full h-full object-cover rounded-lg min-h-[100px] z-20", // Increased z-index for video
+                  isCameraLoading ? "opacity-50" : "opacity-100" // Keep video slightly visible during load
                 )}
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  muted // Keep muted for autoplay
-                  playsInline // Important for mobile
-                  // Add min-height and z-index
-                  className={cn(
-                    "w-full h-full object-cover rounded-lg min-h-[100px] z-10", // Added min-height and z-index
-                    isCameraLoading ? "opacity-50" : "opacity-100" // Keep video slightly visible during load
-                  )}
-                  // Explicit style for visibility (optional, Tailwind classes should suffice)
-                  // style={{ display: 'block', minHeight: '100px', zIndex: 10 }}
-                />
-              </div>
-            ) : (
-              // Center avatar and name when camera is off (already centered by parent flex)
+                // Explicit style for visibility (optional, Tailwind classes should suffice)
+                // style={{ display: 'block', minHeight: '100px', zIndex: 20 }}
+              />
+            </div>
+            {/* Center avatar and name when camera is off (already centered by parent flex) */}
+            {!cameraOn && (
               <div className="flex flex-col items-center justify-center gap-4"> {/* Removed h-full as parent now handles centering */}
                 <Avatar className="h-32 w-32"> {/* Adjusted size */}
                   <AvatarImage src={userPhotoUrl ?? undefined} alt={userName ?? "User"} />
