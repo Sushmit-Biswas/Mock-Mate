@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home", icon: Home },
   { href: "/#my-interviews", label: "My Interviews", icon: Briefcase }, // Updated href
   { href: "/#other-interviews", label: "Other Interviews", icon: Mic }, // Updated href
+  { href: "/resume-checker", label: "Resume Checker", icon: Mic }, // Added Resume Checker
 ];
 
 // Changed to async function

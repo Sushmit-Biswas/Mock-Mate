@@ -34,6 +34,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home", icon: Home },
   { href: "/#my-interviews", label: "My Interviews", icon: Briefcase },
   { href: "/#other-interviews", label: "Other Interviews", icon: Mic },
+  { href: "/resume-checker", label: "Resume Checker", icon: Mic },
 ];
 
 const MobileNav: React.FC<MobileNavProps> = ({ user }) => {

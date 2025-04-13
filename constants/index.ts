@@ -97,6 +97,12 @@ export const mappings = {
   "aws amplify": "amplify",
 };
 
+export const navLinks = [
+  { label: "Home", route: "/" },
+  { label: "Interview", route: "/interview" },
+  { label: "Resume Checker", route: "/resume-checker" },
+];
+
 export const interviewer: CreateAssistantDTO = {
   name: "Interviewer",
   firstMessage:
