@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Menu, LogOut, Image as ImageIcon, Home, Briefcase, Mic } from "lucide-react"; // Removed X, UserCircle
+import { Menu, LogOut, Image as ImageIcon, Home, Briefcase, Mic, FileText } from "lucide-react"; // Removed X, UserCircle
 
 import {
   Sheet,
@@ -34,7 +34,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home", icon: Home },
   { href: "/#my-interviews", label: "My Interviews", icon: Briefcase },
   { href: "/#other-interviews", label: "Other Interviews", icon: Mic },
-  { href: "/resume-checker", label: "Resume Checker", icon: Mic },
+  { href: "/resume-checker", label: "Resume Checker", icon: FileText },
 ];
 
 const MobileNav: React.FC<MobileNavProps> = ({ user }) => {

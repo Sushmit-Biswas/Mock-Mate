@@ -12,8 +12,6 @@ const ResumeCheckerPage = async () => {
 
   return (
     <>
-      <h3 className="mt-8">Resume ATS Checker</h3>
-      
       <div className="mt-6 sm:mt-8">
         <ResumeChecker userId={user.id} />
       </div>
