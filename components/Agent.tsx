@@ -39,7 +39,7 @@ const Agent = ({
   const [isSpeaking, setIsSpeaking] = useState(false);
   // Add camera state
   const [cameraOn, setCameraOn] = useState(false);
-  // const [isCameraLoading, setIsCameraLoading] = useState(false); // Remove camera loading state
+  const [isCameraLoading, setIsCameraLoading] = useState(false); // Re-add camera loading state
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -203,14 +203,20 @@ const Agent = ({
         streamRef.current = null;
       }
       setCameraOn(false);
-      // setIsCameraLoading(false); // Remove loading state logic
+      setIsCameraLoading(false); // Ensure loading is off when camera is turned off
     } else {
       // Turn on camera
-      // setIsCameraLoading(true); // Remove loading state logic
+      setIsCameraLoading(true); // Set loading state
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
+        // Use specific constraints
+        const constraints = {
+          video: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            facingMode: "user" // Explicitly request user-facing camera
+          }
+        };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
         if (videoRef.current) {
           // Ensure the video element is ready before setting srcObject
@@ -227,12 +233,19 @@ const Agent = ({
 
         streamRef.current = stream;
         setCameraOn(true);
-      } catch (error) {
-        console.error("Error accessing camera:", error);
-        alert("Failed to access camera. Please check permissions.");
-      } // finally { // Remove loading state logic
-        // setIsCameraLoading(false); // Remove loading state logic
-      // }
+      } catch (error: unknown) { // Use unknown instead of any
+        // Improved error handling with type checking
+        let errorMessage = "An unknown error occurred";
+        if (error instanceof Error) {
+          errorMessage = error.message;
+          console.error("Error accessing camera:", error.name, error.message, error);
+        } else {
+          console.error("An unexpected error occurred:", error);
+        }
+        alert(`Failed to access camera: ${errorMessage}. Please check permissions and ensure no other app is using the camera.`);
+      } finally {
+        setIsCameraLoading(false); // Unset loading state regardless of success/failure
+      }
     }
   };
 
@@ -281,14 +294,27 @@ const Agent = ({
           <div className="card-content relative dark-gradient rounded-2xl p-6 h-full flex flex-col items-center justify-center overflow-hidden"> {/* Added overflow-hidden */}
             {/* Video or Avatar */}
             {cameraOn ? (
-              // Remove container div and loading indicator
-              <video
-                ref={videoRef}
-                autoPlay
-                muted // Keep muted for autoplay
-                playsInline // Important for mobile
-                className="w-full h-full object-cover rounded-lg" // Remove transition/opacity classes
-              />
+              <div className="w-full h-full relative flex items-center justify-center"> {/* Container for video and loading */}
+                {isCameraLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 z-20 rounded-lg"> {/* Loading indicator with higher z-index */}
+                    {/* You can replace this with a spinner component if available */}
+                    <p className="text-white animate-pulse">Initializing Camera...</p>
+                  </div>
+                )}
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  muted // Keep muted for autoplay
+                  playsInline // Important for mobile
+                  // Add min-height and z-index
+                  className={cn(
+                    "w-full h-full object-cover rounded-lg min-h-[100px] z-10", // Added min-height and z-index
+                    isCameraLoading ? "opacity-50" : "opacity-100" // Keep video slightly visible during load
+                  )}
+                  // Explicit style for visibility (optional, Tailwind classes should suffice)
+                  // style={{ display: 'block', minHeight: '100px', zIndex: 10 }}
+                />
+              </div>
             ) : (
               // Center avatar and name when camera is off (already centered by parent flex)
               <div className="flex flex-col items-center justify-center gap-4"> {/* Removed h-full as parent now handles centering */}
