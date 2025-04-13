@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar components
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createFeedback } from "@/lib/actions/general.action";
-import { AgentProps } from "@/types"; // Import AgentProps
+import { AgentProps } from "@/types";
+import { Video, VideoOff } from "lucide-react"; // Add import for camera icons
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -29,18 +30,22 @@ const Agent = ({
   feedbackId,
   type,
   questions,
-  userPhotoUrl, // Add userPhotoUrl prop
-}: AgentProps & { userPhotoUrl?: string | null }) => { // Add prop to component signature
+  userPhotoUrl,
+}: AgentProps & { userPhotoUrl?: string | null }) => {
   const router = useRouter();
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [lastMessage, setLastMessage] = useState<string>("");
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  // Add camera state
+  const [cameraOn, setCameraOn] = useState(false);
+  // const [isCameraLoading, setIsCameraLoading] = useState(false); // Remove camera loading state
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
 
-  // Add refs for tracking silence
+  // Silent timeout handling
   const silenceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const lastSpeechTimeRef = useRef<number>(0);
-  const SILENCE_THRESHOLD = 4000; // 4 seconds before considering silence as intentional pause
+  const SILENCE_THRESHOLD = 20000; // 20 seconds
 
   useEffect(() => {
     const onCallStart = () => {
@@ -55,9 +60,6 @@ const Agent = ({
       if (message.type === "transcript" && message.transcriptType === "final") {
         const newMessage = { role: message.role, content: message.transcript };
         setMessages((prev) => [...prev, newMessage]);
-
-        // Reset silence detection when a message is received
-        lastSpeechTimeRef.current = Date.now();
 
         // Check for end-of-call keywords
         const transcriptLower = message.transcript.toLowerCase();
@@ -84,9 +86,6 @@ const Agent = ({
         clearTimeout(silenceTimeoutRef.current);
         silenceTimeoutRef.current = null;
       }
-      
-      // Update the last speech time
-      lastSpeechTimeRef.current = Date.now();
     };
 
     const onSpeechEnd = () => {
@@ -100,14 +99,7 @@ const Agent = ({
       }
       
       silenceTimeoutRef.current = setTimeout(() => {
-        const silenceDuration = Date.now() - lastSpeechTimeRef.current;
-        if (silenceDuration > SILENCE_THRESHOLD) {
-          console.log(`Detected silence for ${silenceDuration}ms, allowing AI to respond`);
-          // The AI can respond now (vapi will handle this automatically)
-        } else {
-          console.log(`Short pause detected (${silenceDuration}ms), waiting for more speech`);
-          // Continue listening for more speech
-        }
+        // The AI can respond now (vapi will handle this automatically)
       }, SILENCE_THRESHOLD);
     };
 
@@ -202,6 +194,58 @@ const Agent = ({
     vapi.stop();
   };
 
+  // Function to toggle camera on/off
+  const toggleCamera = async () => {
+    if (cameraOn) {
+      // Turn off camera
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+      setCameraOn(false);
+      // setIsCameraLoading(false); // Remove loading state logic
+    } else {
+      // Turn on camera
+      // setIsCameraLoading(true); // Remove loading state logic
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+
+        if (videoRef.current) {
+          // Ensure the video element is ready before setting srcObject
+          videoRef.current.onloadedmetadata = () => {
+             console.log("Video metadata loaded");
+          };
+          videoRef.current.srcObject = stream;
+          // Attempt to play explicitly after setting srcObject, though autoPlay should handle it
+          await videoRef.current.play().catch(playError => {
+            console.error("Error attempting to play video:", playError);
+            // Handle autoplay issues if necessary
+          });
+        }
+
+        streamRef.current = stream;
+        setCameraOn(true);
+      } catch (error) {
+        console.error("Error accessing camera:", error);
+        alert("Failed to access camera. Please check permissions.");
+      } // finally { // Remove loading state logic
+        // setIsCameraLoading(false); // Remove loading state logic
+      // }
+    }
+  };
+
+  // Add cleanup for camera when component unmounts
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+    };
+  }, []);
+
   // Determine initials for fallback avatar
   const getInitials = (name?: string | null) => {
     if (!name) return "?";
@@ -212,11 +256,10 @@ const Agent = ({
       .toUpperCase();
   };
 
-
   return (
     <>
       {/* Added vertical margin */}
-      <div className="call-view my-12"> {/* Increased margin */}
+      <div className="call-view my-12">
         {/* AI Interviewer Card */}
         <div className="card-interviewer">
           <div className="avatar">
@@ -232,16 +275,47 @@ const Agent = ({
           <h3>AI Interviewer</h3>
         </div>
 
-        {/* User Profile Card - Use Avatar */}
+        {/* User Profile Card - Apply card styles and ensure centering */}
         <div className="card-border">
-          <div className="card-content">
-             <Avatar className="h-[120px] w-[120px]"> {/* Use Avatar component */}
-              <AvatarImage src={userPhotoUrl ?? undefined} alt={userName ?? "User"} />
-              <AvatarFallback className="bg-gray-600 text-white text-4xl"> {/* Style fallback */}
-                {getInitials(userName)}
-              </AvatarFallback>
-            </Avatar>
-            <h3>{userName}</h3>
+          {/* Apply dark-gradient, padding, full height, and flex centering to card-content */}
+          <div className="card-content relative dark-gradient rounded-2xl p-6 h-full flex flex-col items-center justify-center overflow-hidden"> {/* Added overflow-hidden */}
+            {/* Video or Avatar */}
+            {cameraOn ? (
+              // Remove container div and loading indicator
+              <video
+                ref={videoRef}
+                autoPlay
+                muted // Keep muted for autoplay
+                playsInline // Important for mobile
+                className="w-full h-full object-cover rounded-lg" // Remove transition/opacity classes
+              />
+            ) : (
+              // Center avatar and name when camera is off (already centered by parent flex)
+              <div className="flex flex-col items-center justify-center gap-4"> {/* Removed h-full as parent now handles centering */}
+                <Avatar className="h-32 w-32"> {/* Adjusted size */}
+                  <AvatarImage src={userPhotoUrl ?? undefined} alt={userName ?? "User"} />
+                  <AvatarFallback className="bg-gray-600 text-white text-4xl">
+                    {getInitials(userName)}
+                  </AvatarFallback>
+                </Avatar>
+                <h3>{userName}</h3>
+              </div>
+            )}
+
+            {/* Camera toggle button - Positioned relative to card-content */}
+            <button
+              onClick={toggleCamera}
+              className="absolute top-0 right-0 bg-dark-300 p-2 rounded-full hover:bg-dark-200 transition-colors"
+              aria-label={cameraOn ? "Turn camera off" : "Turn camera on"}
+              title={cameraOn ? "Turn camera off" : "Turn camera on"}
+            >
+              {cameraOn ? (
+                <VideoOff size={18} className="text-primary-200" />
+              ) : (
+                <Video size={18} className="text-primary-200" />
+              )}
+            </button>
+            {/* Name is now inside the conditional block */}
           </div>
         </div>
       </div>
@@ -263,7 +337,7 @@ const Agent = ({
       )}
 
       {/* Added vertical margin */}
-      <div className="w-full flex justify-center my-12"> {/* Increased margin */}
+      <div className="w-full flex justify-center my-12">
         {callStatus !== "ACTIVE" ? (
           <button className="relative btn-call" onClick={() => handleCall()}>
             <span
