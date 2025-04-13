@@ -11,6 +11,7 @@ export interface Feedback {
   areasForImprovement: string[];
   finalAssessment: string;
   createdAt: string;
+  transcript?: Array<{role: string, content: string}>; // Add this line
 }
 
 export interface Interview {

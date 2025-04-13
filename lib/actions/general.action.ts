@@ -47,6 +47,7 @@ export async function createFeedback(params: CreateFeedbackParams) {
       areasForImprovement: object.areasForImprovement,
       finalAssessment: object.finalAssessment,
       createdAt: new Date().toISOString(),
+      transcript: transcript, // Save the original transcript
     };
 
     let feedbackRef;
