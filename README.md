@@ -27,10 +27,12 @@ MockMate is a web application designed to help users prepare for job interviews 
 *   🗣️ **AI-Powered Interviews:** Engage in realistic voice conversations.
 *   🧠 **Multiple Interview Types:** Practice for various roles and scenarios.
 *   📈 **Instant Feedback:** Get detailed analysis of your answers.
+*   📝 **Resume Checker:** AI-powered resume analysis and optimization.
+*   🧐 **Interview Guides:** Comprehensive resources for interview preparation.
 *   🔒 **Secure Authentication:** User accounts powered by Firebase Auth.
 *   🎨 **Modern UI:** Clean and responsive interface built with Tailwind CSS.
 *   💾 **Interview History:** Track your progress over time (Firebase Firestore).
-*   ⚙️ **Customizable Settings:** (Future goal) Tailor interview difficulty and focus areas.
+*   ⚙️ **Customizable Settings:** Tailor interview difficulty and focus areas.
 
 ---
 

@@ -1,9 +1,10 @@
-"use client"; // Add this directive for client-side components
+"use client";
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+import { BookOpen, Headphones, FileText, Book } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
@@ -37,8 +38,7 @@ const Footer = () => {
       viewport={{ once: true }}
       variants={containerVariants}
       className="w-full border-t border-violet-500/40 bg-gradient-to-b from-dark-300/90 to-dark-100 backdrop-blur-lg py-8 px-6"
-    >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+    >      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         
         {/* Column 1: Logo & About */}
         <motion.div variants={itemVariants} className="flex flex-col space-y-3">
@@ -61,38 +61,80 @@ const Footer = () => {
         
         {/* Column 2: Quick Links */}
         <motion.div variants={itemVariants} className="flex flex-col space-y-3">
-          <h4 className="text-lg font-semibold text-primary-200 mb-2">Quick Links</h4>
+          <h4 className="text-lg font-semibold text-primary-200 mb-2">Navigation</h4>
           <div className="flex flex-col space-y-2">
             <Link 
               href="/" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center"
+              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Home</span>
             </Link>
             <Link 
               href="/interview" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center"
+              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Start Interview</span>
             </Link>
             <Link 
+              href="/resume-checker" 
+              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+            >
+              <span className="hover:translate-x-1 transition-transform duration-300">Resume Checker</span>
+            </Link>
+          </div>
+        </motion.div>
+
+        {/* Column 3: Resources Links */}
+        <motion.div variants={itemVariants} className="flex flex-col space-y-3">
+          <h4 className="text-lg font-semibold text-primary-200 mb-2">Resources</h4>
+          <div className="flex flex-col space-y-2">
+            <Link 
+              href="/blog" 
+              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+            >
+              <BookOpen size={16} />
+              <span className="hover:translate-x-1 transition-transform duration-300">Blog</span>
+            </Link>
+            <Link 
+              href="/faqs" 
+              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+            >
+              <FileText size={16} />
+              <span className="hover:translate-x-1 transition-transform duration-300">FAQs</span>
+            </Link>
+            <Link 
+              href="/help-center" 
+              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+            >
+              <Headphones size={16} />
+              <span className="hover:translate-x-1 transition-transform duration-300">Help Center</span>
+            </Link>
+            <Link 
+              href="/guides" 
+              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+            >
+              <Book size={16} />
+              <span className="hover:translate-x-1 transition-transform duration-300">Interview Guides</span>
+            </Link>
+          </div>
+        </motion.div>
+          {/* Column 4: Legal Links & Contact */}
+        <motion.div variants={itemVariants} className="flex flex-col space-y-3">
+          <h4 className="text-lg font-semibold text-primary-200 mb-2">Legal & Contact</h4>
+          <div className="flex flex-col space-y-2 mb-4">
+            <Link 
               href="/privacy" 
-              className="text-light-100/80 hover:text-orange-400 transition-colors duration-300 flex items-center"
+              className="text-light-100/80 hover:text-orange-400 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Privacy Policy</span>
             </Link>
             <Link 
               href="/terms" 
-              className="text-light-100/80 hover:text-orange-400 transition-colors duration-300 flex items-center"
+              className="text-light-100/80 hover:text-orange-400 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Terms of Service</span>
             </Link>
           </div>
-        </motion.div>
-        
-        {/* Column 3: Contact */}
-        <motion.div variants={itemVariants} className="flex flex-col space-y-3">
-          <h4 className="text-lg font-semibold text-primary-200 mb-2">Get In Touch</h4>
           <p className="text-light-100/80 text-sm">
             Have questions or feedback? Reach out to our team!
           </p>
