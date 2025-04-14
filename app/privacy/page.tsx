@@ -1,26 +1,34 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+// Removed unused ArrowLeft import
+// import { ArrowLeft } from 'lucide-react'; 
 
 export default function PrivacyPolicy() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent">Privacy Policy</h1>
-        <p className="text-light-100/80 mb-2">Last updated: April 13, 2025</p>
-      </div>
-
-      <div className="prose prose-invert max-w-none">
-        <section className="mb-10">
-          <h2 className="text-2xl font-semibold mb-4 text-primary-200">Introduction</h2>
-          <p className="text-light-100 mb-4">
-            At MockMate, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, 
-            and safeguard your information when you use our AI Interview Platform.
-          </p>
-          <p className="text-light-100 mb-4">
-            Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, 
-            please do not access the site.
-          </p>
-        </section>
+    // Remove redundant background style and classes, it's handled by layout.tsx and globals.css
+    <div className="min-h-screen"> 
+      <div className="max-w-4xl mx-auto px-4 py-16">
+        {/* Apply glass-effect utility class */}
+        <div className="glass-effect p-8 mb-8 text-center"> 
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-violet-500 bg-clip-text text-transparent">Privacy Policy</h1>
+          <p className="text-light-100/80 mb-2">Last updated: April 13, 2025</p>
+        </div>      
+        {/* Apply glass-effect utility class */}
+        <div className="glass-effect p-8"> 
+          <div className="prose prose-invert max-w-none">
+            <section className="mb-10">
+              <h2 className="text-2xl font-semibold mb-4 text-primary-200">Introduction</h2>
+            <p className="text-light-100 mb-4">
+              At MockMate, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, 
+              and safeguard your information when you use our AI Interview Platform.
+            </p>
+            <p className="text-light-100 mb-4">
+              Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, 
+              please do not access the site.
+            </p>
+          </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold mb-4 text-primary-200">Information We Collect</h2>
@@ -76,13 +84,15 @@ export default function PrivacyPolicy() {
             </a>
           </p>
         </section>
-      </div>
+      </div> {/* Closes prose div */}
+    </div> {/* Closes second glass-effect div */}
 
       <div className="mt-12 text-center">
         <Link href="/" className="text-primary-200 hover:underline">
           Return to Home
         </Link>
       </div>
-    </div>
+    </div> {/* Closes max-w-4xl div */}
+  </div> /* Closes min-h-screen div */
   );
 }
