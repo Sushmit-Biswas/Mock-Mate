@@ -1,38 +1,95 @@
-# ✨ MockMate: AI Mock Interview Platform ✨
+<div align="center">
+  <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
+  <h1>✨ MockMate: AI-Powered Interview Preparation Platform ✨</h1>
+</div>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-14+-black?logo=next.js&logoColor=white)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3+-cyan?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-SDK_v9+-orange?logo=firebase&logoColor=white)](https://firebase.google.com/)
-[![Vapi AI](https://img.shields.io/badge/Vapi-AI_Voice-lightgrey)](https://vapi.ai/)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![Next.js](https://img.shields.io/badge/Next.js-14+-black?logo=next.js&logoColor=white)](https://nextjs.org/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3+-cyan?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+  [![Firebase](https://img.shields.io/badge/Firebase-SDK_v9+-orange?logo=firebase&logoColor=white)](https://firebase.google.com/)
+  [![Vapi AI](https://img.shields.io/badge/Vapi-AI_Voice-lightgrey)](https://vapi.ai/)
+  [![Deployment](https://img.shields.io/badge/Deployment-Vercel-black?logo=vercel&logoColor=white)](https://vercel.com/)
+</div>
 
 ---
 
-🚀 **Welcome to MockMate!** Practice your interviewing skills with an intelligent AI interviewer that provides instant feedback. Ace your next technical or behavioral interview! 🤖💼
+<p align="center">
+  🚀 <b>Welcome to MockMate!</b> Master your interview skills with our intelligent AI interviewer that delivers personalized feedback. From technical challenges to behavioral questions, we've got you covered! 🤖💼
+</p>
 
-<!-- ![Project Banner Placeholder](https://via.placeholder.com/1200x400/cccccc/888888?text=MockMate+Project+Banner)
-*(Suggestion: Replace the placeholder above with a cool banner for your project!)* -->
+<p align="center">
+  <a href="#-overview">Overview</a> •
+  <a href="#-key-features">Key Features</a> •   
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-folder-structure">Folder Structure</a> •
+  <a href="#-contributing">Contributing</a> •
+  <a href="#-testimonials">Testimonials</a> •
+  <a href="#-faqs">FAQs</a> •
+  <a href="#-license">License</a>
+</p>
 
 ---
 
 ## 🌟 Overview
 
-MockMate is a web application designed to help users prepare for job interviews by simulating realistic interview scenarios with an AI agent. Users can select interview types (e.g., technical, behavioral), engage in a voice-based conversation with the AI, and receive detailed feedback on their performance, covering aspects like clarity, relevance, and technical accuracy.
+MockMate is a comprehensive interview preparation platform that simulates realistic interview scenarios using advanced AI technology. Users can select from various interview types (technical, behavioral, role-specific), engage in natural voice conversations with our AI interviewer, and receive immediate, detailed feedback on their performance.
+
+With a focus on accessibility and user experience, MockMate helps candidates build confidence, improve their responses, and track progress over time - all in a stress-free environment.
 
 ---
 
 ## ✨ Key Features
 
-*   🗣️ **AI-Powered Interviews:** Engage in realistic voice conversations.
-*   🧠 **Multiple Interview Types:** Practice for various roles and scenarios.
-*   📈 **Instant Feedback:** Get detailed analysis of your answers.
-*   📝 **Resume Checker:** AI-powered resume analysis and optimization.
-*   🧐 **Interview Guides:** Comprehensive resources for interview preparation.
-*   🔒 **Secure Authentication:** User accounts powered by Firebase Auth.
-*   🎨 **Modern UI:** Clean and responsive interface built with Tailwind CSS.
-*   💾 **Interview History:** Track your progress over time (Firebase Firestore).
-*   ⚙️ **Customizable Settings:** Tailor interview difficulty and focus areas.
+<table>
+  <tr>
+    <td>
+      <h3>🗣️ AI-Powered Interviews</h3>
+      Engage in realistic voice conversations with our advanced AI interviewer, powered by Vapi technology.
+    </td>
+    <td>
+      <h3>🧠 Multiple Interview Types</h3>
+      Practice for technical, behavioral, leadership, and role-specific interviews across various industries.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>📈 Instant Feedback</h3>
+      Receive detailed analysis of your answers with metrics on clarity, relevance, technical accuracy, and more.
+    </td>
+    <td>
+      <h3>📝 Resume Checker</h3>
+      Get AI-powered resume analysis and optimization suggestions tailored to your target roles.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>🧐 Interview Guides</h3>
+      Access comprehensive resources covering common questions, strategies, and industry-specific tips.
+    </td>
+    <td>
+      <h3>🔒 Secure Authentication</h3>
+      Your data is protected with Firebase Authentication and secure cloud storage.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>🎨 Modern UI</h3>
+      Enjoy a clean, responsive interface built with Tailwind CSS and Shadcn components.
+    </td>
+    <td>
+      <h3>💾 Interview History</h3>
+      Track your progress over time with detailed history and improvement analytics.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <h3>⚙️ Customizable Settings</h3>
+      Tailor interview difficulty, focus areas, and feedback depth to your specific needs and goals.
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -68,7 +125,7 @@ Follow these steps to set up and run the project locally:
     ```
 
 3.  **Set up Environment Variables:**
-    Create a `.env.local` file in the root directory and add the necessary environment variables. Refer to `.env.example` or the required keys below:
+    Create a `.env.local` file in the root directory and add the necessary environment variables. Required keys:
     ```plaintext
     # Firebase Configuration (obtain from your Firebase project console)
     NEXT_PUBLIC_FIREBASE_API_KEY=
@@ -90,9 +147,6 @@ Follow these steps to set up and run the project locally:
 
     # Google AI Studio Configuration
     GOOGLE_GENERATIVE_AI_API_KEY=
-
-    # Other necessary variables (if any)
-    # e.g., NEXT_PUBLIC_API_BASE_URL=
     ```
     *Note: Ensure Firebase Admin SDK setup is correctly configured if used in API routes.*
 
@@ -105,7 +159,7 @@ Follow these steps to set up and run the project locally:
     pnpm dev
     ```
 
-5.  Open [http://localhost:3000](http://localhost:3000) in your browser to see the application. 🎉
+5.  Open [http://localhost:3000](http://localhost:3000) in your browser to experience MockMate! 🎉
 
 ---
 
@@ -128,6 +182,32 @@ hack-nite/
 ├── package.json          # Project dependencies and scripts
 └── tsconfig.json         # TypeScript configuration
 ```
+
+
+---
+
+
+## ❓ FAQs
+
+<details>
+  <summary><b>Is MockMate free to use?</b></summary>
+  <p>MockMate offers both free and premium plans. The free plan gives you limited access to interview types and feedback features. Our premium plans unlock all interview types, unlimited sessions, detailed analytics, and priority support.</p>
+</details>
+
+<details>
+  <summary><b>What types of interviews does MockMate support?</b></summary>
+  <p>MockMate supports various interview types including technical interviews for software engineers, behavioral interviews, leadership/management interviews, and role-specific interviews for positions in marketing, sales, finance, and more.</p>
+</details>
+
+<details>
+  <summary><b>How does MockMate's AI understand and evaluate my answers?</b></summary>
+  <p>MockMate uses advanced natural language processing models to analyze your responses based on content relevance, structure, clarity, and technical accuracy (for technical interviews). The AI is trained on thousands of successful interview responses and industry best practices.</p>
+</details>
+
+<details>
+  <summary><b>Can I use MockMate on mobile devices?</b></summary>
+  <p>Yes, MockMate is fully responsive and works on mobile devices. However, for the best interview simulation experience, we recommend using a desktop or laptop computer with a stable internet connection.</p>
+</details>
 
 ---
 
@@ -154,10 +234,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgements
 
-*   Inspiration from similar AI interview platforms.
-*   Thanks to the creators of the libraries and tools used.
-*   Shoutout to the Hackathon organizers/community.
+* Inspiration from similar AI interview platforms.
+* Thanks to the creators of the libraries and tools used.
+* Shoutout to the Hackathon organizers/community.
 
 ---
 
-Made with ❤️ and lots of ☕ by ```Sushmit Biswas``` from Team ```NexusKnight```
+<div align="center">
+  <p>Made with ❤️ and lots of ☕ by <code>Sushmit Biswas</code> from Team <code>NexusKnight</code></p>
+  <p>
+    <a href="https://github.com/Sushmit-Biswas">GitHub</a> •
+    <a href="https://www.linkedin.com/in/sushmit-biswas">LinkedIn</a> •
+    <a href="https://x.com/Sushmit__Biswas">X</a>
+  </p>
+</div>
