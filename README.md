@@ -13,7 +13,7 @@
   [![Deployment](https://img.shields.io/badge/Deployment-Vercel-black?logo=vercel&logoColor=white)](https://vercel.com/)
 </div>
 
----
+![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
 <p align="center">
   🚀 <b>Welcome to MockMate!</b> Master your interview skills with our intelligent AI interviewer that delivers personalized feedback. Whether you're facing technical challenges or behavioral questions, our platform has you covered! Plus, take advantage of our <b>Resume Checker</b> to fine-tune your resume and boost your chances at landing your dream job! 🤖💼
@@ -161,7 +161,9 @@ Follow these steps to set up and run the project locally:
     pnpm dev
     ```
 
-5.  Open [http://localhost:3000](http://localhost:3000) in your browser to experience MockMate! 🎉
+5.  Open [http://localhost:3000](http://localhost:3000) in your browser to experience MockMate! <img src="https://user-images.githubusercontent.com/74038190/213844263-a8897a51-32f4-4b3b-b5c2-e1528b89f6f3.png" width="23px" />
+
+
 
 ---
 
@@ -241,7 +243,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 * Thanks to the creators of the libraries and tools used.
 * Shoutout to the Hackathon organizers/community.
 
----
+![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
 <div align="center">
   <p>Made with ❤️ and lots of ☕ by <code>Sushmit Biswas</code> from Team <code>NexusKnight</code></p>
