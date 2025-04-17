@@ -173,7 +173,7 @@ Follow these steps to set up and run the project locally:
 
 ---
 
-## <img src="https://cdn.dribbble.com/userupload/23959994/file/original-8566763c507faa8eb877f9dfec3e9ff0.gif" width="30px" /> Folder Structure (Simplified)
+## <img src="https://cdn.dribbble.com/userupload/23959994/file/original-8566763c507faa8eb877f9dfec3e9ff0.gif" width="35px" /> Folder Structure (Simplified)
 
 ```
 hack-nite/
@@ -252,7 +252,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
 <div align="center">
-  <p>Made with <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e1/512.webp" width="17px" />  and lots of <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f379/512.webp" width="17px" />  <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2615/512.webp" width="17px" /> by <code>Sushmit Biswas</code> from Team <code>NexusKnight</code></p>
+  <p>Made with <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e1/512.webp" width="17px" />  and lots of <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f379/512.webp" width="19px" />  <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2615/512.webp" width="19px" /> by <code>Sushmit Biswas</code> from Team <code>NexusKnight</code></p>
   <p>
     <a href="https://github.com/Sushmit-Biswas">GitHub</a> •
     <a href="https://www.linkedin.com/in/sushmit-biswas">LinkedIn</a> •
