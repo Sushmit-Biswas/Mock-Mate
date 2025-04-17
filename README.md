@@ -68,7 +68,7 @@ Follow these steps to set up and run the project locally:
     ```
 
 3.  **Set up Environment Variables:**
-    Create a `.env.local` file in the root directory and add the necessary environment variables. Refer to `.env.example` (if available) or the required keys below:
+    Create a `.env.local` file in the root directory and add the necessary environment variables. Refer to `.env.example` or the required keys below:
     ```plaintext
     # Firebase Configuration (obtain from your Firebase project console)
     NEXT_PUBLIC_FIREBASE_API_KEY=
