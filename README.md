@@ -1,7 +1,8 @@
 <div align="center">
-  <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
-  <h1>✨ MockMate: AI-Powered Interview Preparation Platform ✨</h1>
-</div>
+  <div align="center">
+    <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
+    <h1>✨ MockMate: Interview Prep & Resume Checker ✨</h1>
+  </div>
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Next.js](https://img.shields.io/badge/Next.js-14+-black?logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -15,7 +16,7 @@
 ---
 
 <p align="center">
-  🚀 <b>Welcome to MockMate!</b> Master your interview skills with our intelligent AI interviewer that delivers personalized feedback. From technical challenges to behavioral questions, we've got you covered! 🤖💼
+  🚀 <b>Welcome to MockMate!</b> Master your interview skills with our intelligent AI interviewer that delivers personalized feedback. Whether you're facing technical challenges or behavioral questions, our platform has you covered! Plus, take advantage of our <b>Resume Checker</b> to fine-tune your resume and boost your chances at landing your dream job! 🤖💼
 </p>
 
 <p align="center">
@@ -31,12 +32,13 @@
 </p>
 
 ---
-
 ## 🌟 Overview
 
 MockMate is a comprehensive interview preparation platform that simulates realistic interview scenarios using advanced AI technology. Users can select from various interview types (technical, behavioral, role-specific), engage in natural voice conversations with our AI interviewer, and receive immediate, detailed feedback on their performance.
 
-With a focus on accessibility and user experience, MockMate helps candidates build confidence, improve their responses, and track progress over time - all in a stress-free environment.
+Our platform also features an intelligent Resume Checker. This tool analyzes your resume against industry standards and provides actionable recommendations to refine your document, ensuring that it stands out to potential employers. Whether you're tweaking your resume for clarity or optimizing keywords, the Resume Checker is designed to boost your job application success.
+
+With a focus on enhancing accessibility and elevating user experience, MockMate empowers candidates to boost their self-confidence, refine their interview skills, and fine-tune their resumes. All of this is achieved within a relaxed and user-friendly environment that adjusts to your pace.
 
 ---
 
@@ -92,16 +94,16 @@ With a focus on accessibility and user experience, MockMate helps candidates bui
 </table>
 
 ---
-
 ## 🛠️ Tech Stack
 
-*   **Framework:** [Next.js](https://nextjs.org/)<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" alt="Next.js" width="20" height="20"/>
-*   **Language:** [TypeScript](https://www.typescriptlang.org/) <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="20" height="20"/>
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/) <img src="https://camo.githubusercontent.com/f36990f11f932129fd60e5d06de1d4340057f62caddd151453609d6ad28b069f/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f7461696c77696e644373732e737667" alt="Tailwind CSS" width="20" height="20"/>
-*   **Backend & Auth:** [Firebase (Auth, Firestore)](https://firebase.google.com/) <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg" alt="Firebase" width="20" height="20"/>
-*   **AI Voice Agent:** [Vapi](https://vapi.ai/)
-*   **UI Components:** [Shadcn/ui](https://ui.shadcn.com/)
-*   **Deployment:** Vercel
+* **Framework:** [Next.js](https://nextjs.org/) <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" alt="Next.js" width="24" height="24"/>
+* **Language:** [TypeScript](https://www.typescriptlang.org/) <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" alt="TypeScript" width="24" height="24"/>
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/) <img src="https://cdn.worldvectorlogo.com/logos/tailwind-css-2.svg" alt="Tailwind CSS" width="24" height="24"/>
+* **Backend & Auth:** [Firebase (Auth, Firestore)](https://firebase.google.com/) <img src="https://firebase.google.com/static/images/brand-guidelines/logo-logomark.png" alt="Firebase" width="24" height="24"/>
+* **AI Voice Agent:** [Vapi](https://vapi.ai/) <img src="https://storage.googleapis.com/aiagents_1/agent-logos/1722190046010-bd1a05f5a5309646.png" alt="Vapi AI" width="24" height="24"/>
+* **UI Components:** [Shadcn/ui](https://ui.shadcn.com/) <img src="https://avatars.githubusercontent.com/u/139895814" alt="Shadcn UI" width="24" height="24"/>
+* **Deployment:** [Vercel](https://vercel.com/) <img src="https://assets.vercel.com/image/upload/v1691671420/repositories/vercel/logo.png" alt="Vercel" width="24" height="24"/>
+
 
 ---
 
@@ -176,6 +178,7 @@ hack-nite/
 ├── firebase/             # Firebase configuration (client, admin SDK)
 ├── lib/                  # Utility functions, SDKs, actions (server/client)
 ├── public/               # Static assets (images, icons)
+├── styles/               # Card and testimonials styles
 ├── types/                # TypeScript type definitions
 ├── .env.local            # Local environment variables (Gitignored)
 ├── next.config.ts        # Next.js configuration
@@ -191,7 +194,7 @@ hack-nite/
 
 <details>
   <summary><b>Is MockMate free to use?</b></summary>
-  <p>MockMate offers both free and premium plans. The free plan gives you limited access to interview types and feedback features. Our premium plans unlock all interview types, unlimited sessions, detailed analytics, and priority support.</p>
+  <p>Yes, MockMate is currently free for use for all users. Enjoy full access to its features without any cost, with premium options potentially available in the future.</p>
 </details>
 
 <details>
@@ -201,7 +204,7 @@ hack-nite/
 
 <details>
   <summary><b>How does MockMate's AI understand and evaluate my answers?</b></summary>
-  <p>MockMate uses advanced natural language processing models to analyze your responses based on content relevance, structure, clarity, and technical accuracy (for technical interviews). The AI is trained on thousands of successful interview responses and industry best practices.</p>
+  <p>MockMate leverages highly advanced and highly sophisticated Gemini AI models, trusted by everyone, to thoroughly analyze your responses. These models assess content relevance, structure, clarity, and technical accuracy to provide detailed, personalized feedback.</p>
 </details>
 
 <details>
