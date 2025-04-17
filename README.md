@@ -1,8 +1,9 @@
 <div align="center">
   <div align="center">
     <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
-    <h1>✨ MockMate: Interview Prep & Resume Checker ✨</h1>
+    <h1><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" /> MockMate: Interview Prep & Resume Checker <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" /> </h1>
   </div>
+
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Next.js](https://img.shields.io/badge/Next.js-14+-black?logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -16,7 +17,7 @@
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
 <p align="center">
-  🚀 <b>Welcome to MockMate!</b> Master your interview skills with our intelligent AI interviewer that delivers personalized feedback. Whether you're facing technical challenges or behavioral questions, our platform has you covered! Plus, take advantage of our <b>Resume Checker</b> to fine-tune your resume and boost your chances at landing your dream job! 🤖💼
+  🚀 <b>Welcome to MockMate!</b> Master your interview skills with our intelligent AI interviewer that delivers personalized feedback. Whether you're facing technical challenges or behavioral questions, our platform has you covered! Plus, take advantage of our <b>Resume Checker</b> to fine-tune your resume and boost your chances at landing your dream job! 🔮🤖💼
 </p>
 
 <p align="center">
@@ -32,7 +33,10 @@
 </p>
 
 ---
-## 🌟 Overview
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f31f/512.webp" width="25px" /> Overview
+
+
+
 
 MockMate is a comprehensive interview preparation platform that simulates realistic interview scenarios using advanced AI technology. Users can select from various interview types (technical, behavioral, role-specific), engage in natural voice conversations with our AI interviewer, and receive immediate, detailed feedback on their performance.
 
@@ -42,7 +46,9 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
 
 ---
 
-## ✨ Key Features
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/26a1/512.webp" width="25px" /> Key Features
+
+
 
 <table>
   <tr>
@@ -87,14 +93,14 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
   </tr>
   <tr>
     <td colspan="2">
-      <h3>⚙️ Customizable Settings</h3>
+      <h3>🛠️ Customizable Settings</h3>
       Tailor interview difficulty, focus areas, and feedback depth to your specific needs and goals.
     </td>
   </tr>
 </table>
 
 ---
-## 🛠️ Tech Stack
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2699_fe0f/512.webp" width="25px" /> Tech Stack
 
 * **Framework:** [Next.js](https://nextjs.org/) <img src="https://marcbruederlin.gallerycdn.vsassets.io/extensions/marcbruederlin/next-icons/0.1.0/1723747598319/Microsoft.VisualStudio.Services.Icons.Default" alt="Next.js" width="24" height="24"/>
 * **Language:** [TypeScript](https://www.typescriptlang.org/) <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" alt="TypeScript" width="24" height="24"/>
@@ -107,7 +113,7 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
 
 ---
 
-## 🚀 Getting Started
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/512.webp" width="25px" /> Getting Started
 
 Follow these steps to set up and run the project locally:
 
@@ -167,7 +173,7 @@ Follow these steps to set up and run the project locally:
 
 ---
 
-## 📁 Folder Structure (Simplified)
+## <img src="https://cdn.dribbble.com/userupload/23959994/file/original-8566763c507faa8eb877f9dfec3e9ff0.gif" width="30px" /> Folder Structure (Simplified)
 
 ```
 hack-nite/
@@ -192,7 +198,7 @@ hack-nite/
 ---
 
 
-## ❓ FAQs
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2753/512.webp" width="23px" /> FAQs
 
 <details>
   <summary><b>Is MockMate free to use?</b></summary>
@@ -216,7 +222,7 @@ hack-nite/
 
 ---
 
-## 🤝 Contributing
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1faf1_1f3fb_200d_1faf2_1f3fc/512.webp" width="25px" /> Contributing
 
 Contributions are welcome! If you'd like to contribute, please follow these steps:
 
@@ -231,13 +237,13 @@ Please ensure your code adheres to the project's coding standards and includes t
 
 ---
 
-## 📜 License
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/270d_1f3fc/512.webp" width="25px" />  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgements
+## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f64f_1f3fc/512.webp" width="25px" /> Acknowledgements
 
 * Inspiration from similar AI interview platforms.
 * Thanks to the creators of the libraries and tools used.
@@ -246,7 +252,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
 <div align="center">
-  <p>Made with ❤️ and lots of ☕ by <code>Sushmit Biswas</code> from Team <code>NexusKnight</code></p>
+  <p>Made with <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e1/512.webp" width="17px" />  and lots of <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f379/512.webp" width="17px" />  <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2615/512.webp" width="17px" /> by <code>Sushmit Biswas</code> from Team <code>NexusKnight</code></p>
   <p>
     <a href="https://github.com/Sushmit-Biswas">GitHub</a> •
     <a href="https://www.linkedin.com/in/sushmit-biswas">LinkedIn</a> •
