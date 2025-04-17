@@ -96,7 +96,7 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
 ---
 ## 🛠️ Tech Stack
 
-* **Framework:** [Next.js](https://nextjs.org/) <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" alt="Next.js" width="24" height="24"/>
+* **Framework:** [Next.js](https://nextjs.org/) <img src="https://marcbruederlin.gallerycdn.vsassets.io/extensions/marcbruederlin/next-icons/0.1.0/1723747598319/Microsoft.VisualStudio.Services.Icons.Default" alt="Next.js" width="24" height="24"/>
 * **Language:** [TypeScript](https://www.typescriptlang.org/) <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" alt="TypeScript" width="24" height="24"/>
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/) <img src="https://cdn.worldvectorlogo.com/logos/tailwind-css-2.svg" alt="Tailwind CSS" width="24" height="24"/>
 * **Backend & Auth:** [Firebase (Auth, Firestore)](https://firebase.google.com/) <img src="https://firebase.google.com/static/images/brand-guidelines/logo-logomark.png" alt="Firebase" width="24" height="24"/>
