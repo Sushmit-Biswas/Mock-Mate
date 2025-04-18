@@ -3,12 +3,11 @@
   <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
 
   <!-- Stylized MockMate SVG -->
- 
+  <img src="public/mockmate.svg" alt="MockMate" height="60">
 
   <!-- Subtitle with Sparkle Emojis -->
   <h1>
     <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" alt="Sparkles" />
-     <img src="public/mockmate.svg" alt="MockMate" height="60">
     Interview Prep & Resume Checker
     <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" alt="Sparkles" />
   </h1>
