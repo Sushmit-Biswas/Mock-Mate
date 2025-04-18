@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 import { BookOpen, Headphones, FileText, Book } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -65,19 +65,19 @@ const Footer = () => {
           <div className="flex flex-col space-y-2">
             <Link 
               href="/" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-blue-400 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Home</span>
             </Link>
             <Link 
               href="/interview" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Start Interview</span>
             </Link>
             <Link 
               href="/resume-checker" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-purple-400 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Resume Checker</span>
             </Link>
@@ -90,28 +90,28 @@ const Footer = () => {
           <div className="flex flex-col space-y-2">
             <Link 
               href="/blog" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-red-400 transition-colors duration-300 flex items-center gap-2"
             >
               <BookOpen size={16} />
               <span className="hover:translate-x-1 transition-transform duration-300">Blog</span>
             </Link>
             <Link 
               href="/faqs" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-teal-400 transition-colors duration-300 flex items-center gap-2"
             >
               <FileText size={16} />
               <span className="hover:translate-x-1 transition-transform duration-300">FAQs</span>
             </Link>
             <Link 
               href="/help-center" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-amber-400 transition-colors duration-300 flex items-center gap-2"
             >
               <Headphones size={16} />
               <span className="hover:translate-x-1 transition-transform duration-300">Help Center</span>
             </Link>
             <Link 
               href="/guides" 
-              className="text-light-100/80 hover:text-primary-200 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-sky-400 transition-colors duration-300 flex items-center gap-2"
             >
               <Book size={16} />
               <span className="hover:translate-x-1 transition-transform duration-300">Interview Guides</span>
@@ -124,7 +124,7 @@ const Footer = () => {
           <div className="flex flex-col space-y-2 mb-4">
             <Link 
               href="/privacy" 
-              className="text-light-100/80 hover:text-orange-400 transition-colors duration-300 flex items-center gap-2"
+              className="text-light-100/80 hover:text-pink-400 transition-colors duration-300 flex items-center gap-2"
             >
               <span className="hover:translate-x-1 transition-transform duration-300">Privacy Policy</span>
             </Link>
@@ -144,7 +144,7 @@ const Footer = () => {
               target="_blank" 
               rel="noopener noreferrer"
               whileHover={{ y: -4, scale: 1.2 }}
-              className="text-light-400 hover:text-violet-400 transition-all"
+              className="text-light-400 hover:text-blue-400 transition-all"
             >
               <FaGithub size={22} />
             </motion.a>
@@ -164,7 +164,7 @@ const Footer = () => {
               whileHover={{ y: -4, scale: 1.2 }}
               className="text-light-400 hover:text-green-400 transition-all"
             >
-              <FaTwitter size={22} />
+              <FaXTwitter size={22} />
             </motion.a>
             <motion.a 
               href="mailto:sushmit.biswas@iiitb.ac.in" 
