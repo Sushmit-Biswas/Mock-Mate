@@ -6,6 +6,8 @@
 <!-- SVG (MockMate) with tighter spacing below -->
 <img src="public/mockmate.svg" alt="MockMate" height="60" style="margin-bottom: -10px;" />
 
+![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
+
   <!-- Subtitle with Sparkle Emojis -->
   <h1>
     <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" alt="Sparkles" />
