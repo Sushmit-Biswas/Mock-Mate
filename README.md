@@ -3,7 +3,8 @@
   <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
 
   <!-- Stylized MockMate SVG -->
-  <img src="public/mockmate.svg" alt="MockMate" height="60">
+<!-- SVG (MockMate) with tighter spacing below -->
+<img src="public/mockmate.svg" alt="MockMate" height="60" style="margin-bottom: -10px;" />
 
   <!-- Subtitle with Sparkle Emojis -->
   <h1>
