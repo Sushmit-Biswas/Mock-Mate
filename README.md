@@ -1,8 +1,18 @@
 <div align="center">
   <div align="center">
-    <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
-    <h1><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" /> MockMate: Interview Prep & Resume Checker <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" /> </h1>
-  </div>
+  <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
+
+  <!-- Stylized MockMate SVG -->
+  <img src="public/mockmate.svg" alt="MockMate" height="60">
+
+  <!-- Subtitle with Sparkle Emojis -->
+  <h1>
+    <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" alt="Sparkles" />
+    Interview Prep & Resume Checker
+    <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2728/512.webp" width="30px" alt="Sparkles" />
+  </h1>
+</div>
+
 
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -16,9 +26,13 @@
 
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
+
 <p align="center">
   🚀 <b>Welcome to MockMate!</b> Master your interview skills with our intelligent AI interviewer that delivers personalized feedback. Whether you're facing technical challenges or behavioral questions, our platform has you covered! Plus, take advantage of our <b>Resume Checker</b> to fine-tune your resume and boost your chances at landing your dream job! 🔮🤖💼
 </p>
+
+
+
 
 <p align="center">
   <a href="#-overview">Overview</a> •
