@@ -322,8 +322,8 @@ const Agent = ({
 
         {/* User Profile Card - Apply card styles and ensure centering */}
         <div className="card-border">
-          {/* Apply dark-gradient, padding, full height, and flex centering to card-content */}
-          <div className="card-content relative dark-gradient rounded-2xl p-6 h-full flex flex-col items-center justify-center overflow-hidden"> {/* Added overflow-hidden */}
+          {/* Apply dark-gradient, padding, full height, and flex centering to card-content with banner.png background */}
+          <div className="card-content relative dark-gradient rounded-2xl p-6 h-full flex flex-col items-center justify-center overflow-hidden bg-[url('/banner.png')] bg-cover bg-center"> {/* Added banner.png background */}
             {/* Always create the video element but hide it when not in use */}
             <div className={cn(
               "w-full h-full relative flex items-center justify-center",

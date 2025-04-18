@@ -216,9 +216,7 @@
 
     .card-interviewer {
       @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200/50 flex-1 sm:basis-1/2 w-full;
-    }
-
-    .card-content {
+    }    .card-content {
       @apply flex-center flex-col gap-2;
       
       /* Add styling for video element to match avatar */
@@ -236,6 +234,10 @@
       button:hover {
         transform: scale(1.1);
       }
+    }
+    
+    .card-content.relative.dark-gradient.rounded-2xl.p-6.h-full.flex.flex-col.items-center.justify-center.overflow-hidden {
+      @apply bg-[url('/banner.png')] bg-cover bg-center;
     }
 
     .avatar {
@@ -342,7 +344,7 @@
 }
 
 @utility blue-gradient-dark {
-  @apply bg-gradient-to-b from-[#171532] to-[#08090D];
+  @apply bg-[url('/banner_2.png')] bg-cover bg-center;
 }
 
 @utility blue-gradient {

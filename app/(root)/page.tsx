@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import InterviewList from "@/components/InterviewList"; // Import the list component
 import TestimonialsSection from "@/components/TestimonialsSection"; // Import the new testimonials component
+import InteractiveRobot from "@/components/InteractiveRobot"; // Import the 3D robot component
 import { getCurrentUser } from "@/lib/actions/auth.action";
 import {
   getInterviewsByUserId,
@@ -89,13 +90,9 @@ async function Home() {
           </Button>
         </div>
 
-        <Image
-          src="/robot.png"
-          alt="robo-dude"
-          width={400}
-          height={400}
-          className="max-sm:hidden"
-        />
+        <div className="max-sm:hidden">
+          <InteractiveRobot />
+        </div>
       </section>
 
       {/* Changed from "Your Interviews" to "My Interviews" */}
