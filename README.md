@@ -3,8 +3,19 @@
   <img src="public/web_banner.png" alt="MockMate Banner" width="100%">
 
   <!-- Stylized MockMate SVG -->
-<!-- SVG (MockMate) with tighter spacing below -->
-<img src="public/mockmate.svg" alt="MockMate" height="60" style="margin-bottom: -10px;" />
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <img src="public/logo.svg" alt="MockMate Logo" height="60">
+      </td>
+      <td style="padding-left: 10px;">
+        <img src="public/mockmate.svg" alt="MockMate Text" height="60">
+      </td>
+    </tr>
+  </table>
+</div>
+
 
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
