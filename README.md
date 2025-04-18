@@ -150,7 +150,7 @@ Follow these steps to set up and run the project locally:
     ```
 
 3.  **Set up Environment Variables:**
-    Create a `.env.local` file in the root directory and add the necessary environment variables. Required keys:
+    Create a `.env.local` file in the root directory and add the necessary environment variables. You can also refer to `.env.example` file for reference. Required keys:
     ```plaintext
     # Firebase Configuration (obtain from your Firebase project console)
     NEXT_PUBLIC_FIREBASE_API_KEY=
@@ -185,8 +185,6 @@ Follow these steps to set up and run the project locally:
     ```
 
 5.  Open [http://localhost:3000](http://localhost:3000) in your browser to experience MockMate! <img src="https://user-images.githubusercontent.com/74038190/213844263-a8897a51-32f4-4b3b-b5c2-e1528b89f6f3.png" width="23px" />
-
-
 
 ---
 
