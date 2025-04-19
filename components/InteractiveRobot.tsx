@@ -54,7 +54,7 @@ function RobotModel({ mousePosition }: { mousePosition: { x: number; y: number }
   }, [scene]);
 
   return (
-    <group ref={group} position={[0, -0.5, 0]} scale={1.5}>
+    <group ref={group} position={[0, -0.5, 0]} scale={4.5}>
       <primitive object={scene} />
     </group>
   )
