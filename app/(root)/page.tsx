@@ -95,21 +95,23 @@ async function Home() {
         </div>
       </section>
 
-      {/* Changed from "Your Interviews" to "My Interviews" */}
-      <InterviewList
-        title="My Interviews"
-        interviews={userInterviewsWithDetails} // Pass data with icons
-        emptyMessage="You haven't created any interviews yet"
-        // Removed itemsPerPage prop
-      />
+      {/* Only render "My Interviews" section if there are interviews */}
+      {userInterviewsWithDetails.length > 0 && (
+        <InterviewList
+          title="My Interviews"
+          interviews={userInterviewsWithDetails}
+          emptyMessage="You haven't created any interviews yet"
+        />
+      )}
 
-      {/* Use InterviewList for "Other Interviews" with full details */}
-      <InterviewList
-        title="Other Interviews"
-        interviews={allInterviewsWithDetails} // Pass data with icons
-        emptyMessage="There are no interviews available"
-        // Removed itemsPerPage prop
-      />
+      {/* Only render "Other Interviews" section if there are interviews */}
+      {allInterviewsWithDetails.length > 0 && (
+        <InterviewList
+          title="Other Interviews"
+          interviews={allInterviewsWithDetails}
+          emptyMessage="There are no interviews available"
+        />
+      )}
       
       {/* Add the new testimonials section */}
       <TestimonialsSection />
