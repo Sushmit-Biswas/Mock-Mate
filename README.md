@@ -124,6 +124,7 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/) <img src="https://cdn.worldvectorlogo.com/logos/tailwind-css-2.svg" alt="Tailwind CSS" width="24" height="24"/>
 * **Backend & Auth:** [Firebase (Auth, Firestore)](https://firebase.google.com/) <img src="https://firebase.google.com/static/images/brand-guidelines/logo-logomark.png" alt="Firebase" width="24" height="24"/>
 * **AI Voice Agent:** [Vapi](https://vapi.ai/) <img src="https://storage.googleapis.com/aiagents_1/agent-logos/1722190046010-bd1a05f5a5309646.png" alt="Vapi AI" width="24" height="24"/>
+* **3D Graphics:** [Three.js](https://threejs.org/) <img src="https://canada1.discourse-cdn.com/flex035/uploads/threejs/optimized/2X/e/e4f86d2200d2d35c30f7b1494e96b9595ebc2751_2_1016x1024.png" alt="Three.js" width="24" height="24"/>
 * **UI Components:** [Shadcn/ui](https://ui.shadcn.com/) <img src="https://avatars.githubusercontent.com/u/139895814" alt="Shadcn UI" width="24" height="24"/>
 * **Deployment:** [Vercel](https://vercel.com/) <img src="https://assets.vercel.com/image/upload/v1691671420/repositories/vercel/logo.png" alt="Vercel" width="24" height="24"/>
 
@@ -200,7 +201,7 @@ hack-nite/
 ├── constants/            # Application constants (e.g., navigation links)
 ├── firebase/             # Firebase configuration (client, admin SDK)
 ├── lib/                  # Utility functions, SDKs, actions (server/client)
-├── public/               # Static assets (images, icons)
+├── public/               # Static assets (images, icons, 3D-models)
 ├── styles/               # Card and testimonials styles
 ├── types/                # TypeScript type definitions
 ├── .env.local            # Local environment variables (Gitignored)
