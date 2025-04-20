@@ -11,6 +11,18 @@ interface FormFieldProps<T extends FieldValues> {
   type?: "text" | "email" | "password" | "file";
 }
 
+
+/**
+ * FormField component for rendering a controlled input field with label and validation message.
+ * 
+ * @param {Control<T>} control - The control object from react-hook-form.
+ * @param {Path<T>} name - The name of the field in the form.
+ * @param {string} label - The label for the input field.
+ * @param {string} [placeholder] - The placeholder text for the input field.
+ * @param {"text" | "email" | "password" | "file"} [type] - The type of the input field.
+ * @returns {JSX.Element} The rendered input field with label and validation message.
+ */
+
 const FormField = <T extends FieldValues>({
     control,
     name,

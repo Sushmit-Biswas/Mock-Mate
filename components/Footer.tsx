@@ -7,6 +7,15 @@ import { MdEmail } from 'react-icons/md';
 import { BookOpen, Headphones, FileText, Book } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+/**
+ * Footer component that displays navigation links and information.
+ * It includes animations for a smooth appearance.
+ * 
+ * @returns {JSX.Element} The rendered footer component.
+ */
+
+
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   

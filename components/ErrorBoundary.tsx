@@ -8,6 +8,14 @@ interface ErrorBoundaryProps {
   fallback?: React.ReactNode;
 }
 
+/**
+ * ErrorBoundary component to catch JavaScript errors in the component tree.
+ * It provides a fallback UI when an error occurs.
+ * 
+ * @param {React.ReactNode} children - The child components to render.
+ * @param {React.ReactNode} fallback - The fallback UI to display on error.
+ */
+
 const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ 
   children, 
   fallback = <DefaultErrorFallback /> 

@@ -2,6 +2,7 @@
 @plugin "tailwindcss-animate";
 @custom-variant dark (&:is(.dark *));
 
+/* Theme variables for consistent color palette throughout the application */
 @theme {
   --color-success-100: #49de50;
   --color-success-200: #42c748;
@@ -25,6 +26,7 @@
   --bg-pattern: url("/pattern5.jpg");
 }
 
+/* Root variables used for theming and dark mode support */
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -60,6 +62,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Dark mode theme overrides */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -94,6 +97,7 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Additional theme variables calculated from base values */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -132,6 +136,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Base styles for HTML elements */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -156,7 +161,9 @@
   }
 }
 
+/* Component-specific styles for consistent UI elements */
 @layer components {
+  /* Call-to-action button with success state styling */
   .btn-call {
     @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors duration-150 bg-success-100 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-success-200 hover:bg-success-200 min-w-28 cursor-pointer items-center justify-center overflow-visible;
 
@@ -165,24 +172,32 @@
     }
   }
 
+  /* Disconnect button with destructive state styling */
   .btn-disconnect {
     @apply inline-block px-7 py-3 text-sm font-bold leading-5 text-white transition-colors duration-150 bg-destructive-100 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-destructive-200 hover:bg-destructive-200 min-w-28;
   }
-
+  
+  /* File upload button styling */
   .btn-upload {
     @apply flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md;
   }
+  
+  /* Primary button styling - main accent color */
   .btn-primary {
     @apply w-fit !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
   }
+  
+  /* Secondary button styling - for alternative actions */
   .btn-secondary {
     @apply w-fit !bg-dark-200 !text-primary-200 hover:!bg-dark-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
   }
 
+  /* Upload button specific styling */
   .btn-upload {
     @apply bg-dark-200 rounded-full min-h-12 px-5 cursor-pointer border border-input  overflow-hidden;
   }
 
+  /* Card styles with border animation */
   .card-border {
     @apply border-gradient p-0.5 rounded-2xl w-fit;
   }
@@ -323,14 +338,19 @@
   }
 }
 
+/* Custom utility classes for reusable effects */
+
+/* Dark gradient background - used for cards and panels */
 @utility dark-gradient {
   @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
 }
 
+/* Border gradient - creates subtle animated borders */
 @utility border-gradient {
   @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
 }
 
+/* Background pattern utilities for different sections */
 @utility pattern {
   @apply bg-[url('/pattern1.jpg')] bg-top bg-no-repeat bg-fixed bg-cover;
 }
@@ -343,6 +363,7 @@
   @apply bg-[url('/pattern5.jpg')] bg-top bg-no-repeat bg-fixed bg-cover;
 }
 
+/* Blue gradient backgrounds - used for highlights and feature sections */
 @utility blue-gradient-dark {
   @apply bg-[url('/banner_2.png')] bg-cover bg-center;
 }
@@ -351,14 +372,17 @@
   @apply bg-gradient-to-l from-[#FFFFFF] to-[#CAC5FE];
 }
 
+/* Centering utility for flex elements */
 @utility flex-center {
   @apply flex items-center justify-center;
 }
 
+/* Animation utility for fade-in effects */
 @utility animate-fadeIn {
   animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Glass effect for modern UI elements with backdrop blur */
 @utility glass-effect {
   @apply relative overflow-hidden rounded-2xl backdrop-blur-md bg-dark-100/30 shadow-xl;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
@@ -372,6 +396,7 @@
   }
 }
 
+/* Fade-in animation definition */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -383,7 +408,7 @@
   }
 }
 
-/* Custom Scrollbar Styles */
+/* Custom scrollbar styling for better UX */
 @layer base {
   /* For Webkit browsers (Chrome, Safari, Edge) */
   ::-webkit-scrollbar {
@@ -414,6 +439,7 @@
   }
 }
 
+/* Ringing animation for call indicators */
 @keyframes ringing {
   0% {
     transform: scale(0);

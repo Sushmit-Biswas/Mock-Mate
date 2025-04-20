@@ -48,6 +48,7 @@ const Agent = ({
   const silenceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const SILENCE_THRESHOLD = 20000; // 20 seconds
 
+  // Set up event listeners for call status changes
   useEffect(() => {
     const onCallStart = () => {
       setCallStatus(CallStatus.ACTIVE);
@@ -129,6 +130,16 @@ const Agent = ({
       }
     };
   }, [callStatus]);
+
+  // Handle feedback generation when call status changes
+  // This effect will run when the call status changes to FINISHED
+  // and will check if the type is "generate" or not
+  // If the type is "generate", it will redirect to the home page
+  // If the type is not "generate", it will call the handleGenerateFeedback function
+  // to generate feedback
+  // and redirect to the feedback page
+  // If there are no messages, it will not do anything
+  // If the call status is not FINISHED, it will not do anything
 
   useEffect(() => {
     if (messages.length > 0) {

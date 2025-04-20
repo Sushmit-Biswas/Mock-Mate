@@ -7,6 +7,15 @@ interface ConfettiSuccessProps {
   trigger?: boolean;
 }
 
+
+/**
+ * ConfettiSuccess component to display confetti animation on success.
+ * 
+ * @param {boolean} trigger - Determines if the confetti animation should be triggered.
+ * @returns {null} - This component doesn't render anything visible.
+ */
+
+
 const ConfettiSuccess: React.FC<ConfettiSuccessProps> = ({ trigger = true }) => {
   const [fired, setFired] = useState(false);
 

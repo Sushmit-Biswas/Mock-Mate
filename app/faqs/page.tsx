@@ -5,8 +5,16 @@ import { ChevronDown, ChevronUp, Home, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
-// FAQ Item component with enhanced animations and styling
+/**
+ * FAQ Item Component
+ * Renders an expandable question and answer pair with animations
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.question - The FAQ question text
+ * @param {string} props.answer - The FAQ answer text
+ */
 const FAQItem = ({ question, answer }) => {
+  // Track expanded/collapsed state
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,6 +29,7 @@ const FAQItem = ({ question, answer }) => {
           <ChevronDown size={20} />
         </div>
       </button>
+      {/* Animated content drawer using framer-motion */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -40,7 +49,15 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-// FAQ category section with enhanced styling
+/**
+ * FAQ Category Component
+ * Groups related FAQ items under a category heading with visual styling
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.title - Category title
+ * @param {Array} props.faqs - Array of FAQ objects with question and answer properties
+ * @param {string} props.iconEmoji - Emoji to display next to the category title
+ */
 const FAQCategory = ({ title, faqs, iconEmoji }) => {
   return (
     <motion.div 
@@ -64,11 +81,16 @@ const FAQCategory = ({ title, faqs, iconEmoji }) => {
   );
 };
 
+/**
+ * Main FAQs Page Component
+ * Displays searchable frequently asked questions organized by categories
+ */
 export default function FAQsPage() {
+  // State for search functionality
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredFaqData, setFilteredFaqData] = useState([]);
   
-  // FAQ data organized by categories - updated to match README
+  // FAQ data organized by categories with detailed information
   const faqData = [
     {
       category: "General Questions",
@@ -160,13 +182,17 @@ export default function FAQsPage() {
     }
   ];
 
-  // Filter FAQs based on search query
+  /**
+   * Filter FAQs based on search query
+   * Updates the filtered data whenever search query changes
+   */
   useEffect(() => {
     if (!searchQuery.trim()) {
       setFilteredFaqData(faqData);
       return;
     }
 
+    // Filter both questions and answers to match search terms
     const filtered = faqData.map(category => {
       const filteredFaqs = category.faqs.filter(faq => 
         faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -182,14 +208,14 @@ export default function FAQsPage() {
     setFilteredFaqData(filtered);
   }, [searchQuery]);
 
-  // Initialize filtered data
+  // Initialize filtered data on component mount
   useEffect(() => {
     setFilteredFaqData(faqData);
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200">
-      {/* Breadcrumb Navigation */}
+      {/* Breadcrumb navigation for better site navigation */}
       <div className="max-w-6xl mx-auto pt-6 px-4 md:px-6">
         <div className="flex items-center text-sm text-light-400">
           <Link href="/" className="flex items-center hover:text-primary-200 transition-colors">
@@ -203,7 +229,7 @@ export default function FAQsPage() {
       
       <div className="py-20 px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
-          {/* Header with improved spacing */}
+          {/* Animated page header with gradient text */}
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -219,7 +245,7 @@ export default function FAQsPage() {
             </p>
           </motion.div>
 
-          {/* Search Bar with enhanced styling */}
+          {/* Search bar for filtering FAQs */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -253,7 +279,7 @@ export default function FAQsPage() {
             </div>
           </motion.div>
 
-          {/* FAQ Categories with search results messaging */}
+          {/* FAQ Categories with conditional empty state */}
           {filteredFaqData.length === 0 ? (
             <div className="text-center py-12">
               <h3 className="text-xl text-light-100 mb-2">No results found</h3>
@@ -270,7 +296,7 @@ export default function FAQsPage() {
             ))
           )}
 
-          {/* Still Have Questions - enhanced styling */}
+          {/* Call-to-action section for additional support */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

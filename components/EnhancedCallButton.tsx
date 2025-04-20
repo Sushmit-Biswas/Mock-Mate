@@ -12,6 +12,17 @@ interface EnhancedCallButtonProps {
   className?: string;
 }
 
+/**
+ * EnhancedCallButton component for call actions with animations and effects.
+ * 
+ * @param {function} onClick - Function to call when button is clicked.
+ * @param {boolean} isActive - Indicates if the button is in active state.
+ * @param {boolean} isListening - Indicates if the button is in listening state.
+ * @param {string} type - Type of button ('start', 'end', 'mute').
+ * @param {string} className - Additional class names for styling.
+ */
+
+
 const EnhancedCallButton = ({ 
   onClick, 
   isActive = false, 

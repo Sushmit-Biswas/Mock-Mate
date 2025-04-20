@@ -6,7 +6,11 @@ import Image from 'next/image';
 import { CalendarIcon, Clock, Tag, Search, Home, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Blog post data (mock data)
+/**
+ * Blog post data (mock data)
+ * Contains articles focused on interview preparation and career advice
+ * Each post includes metadata like author, date, and read time
+ */
 const blogPosts = [
   {
     id: 1,
@@ -54,10 +58,15 @@ const blogPosts = [
   }
 ];
 
+/**
+ * Blog Page Component
+ * Displays a collection of blog posts with search functionality and category filters
+ * Features animated elements using framer-motion for enhanced UX
+ */
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200">
-      {/* Breadcrumb Navigation */}
+      {/* Breadcrumb Navigation for site hierarchy */}
       <div className="max-w-7xl mx-auto pt-6 px-4 md:px-6">
         <div className="flex items-center text-sm text-light-400">
           <Link href="/" className="flex items-center hover:text-primary-200 transition-colors">
@@ -69,12 +78,13 @@ export default function BlogPage() {
         </div>
       </div>
       
-      {/* Hero Section with enhanced styling */}
+      {/* Hero Section with search and category filters */}
       <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 lg:pt-24 lg:pb-20 max-w-7xl mx-auto">
-        {/* Decorative elements */}
+        {/* Decorative background elements */}
         <div className="absolute top-20 right-10 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-10 left-10 w-72 h-72 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
         
+        {/* Animated page header with gradient text */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,7 +102,7 @@ export default function BlogPage() {
           </p>
         </motion.div>
         
-        {/* Search Bar */}
+        {/* Search Bar for finding articles */}
         <div className="max-w-2xl mx-auto mb-12">
           <div className="relative">
             <input
@@ -106,7 +116,7 @@ export default function BlogPage() {
           </div>
         </div>
         
-        {/* Featured Categories with enhanced styling */}
+        {/* Featured Categories for quick filtering */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -128,7 +138,7 @@ export default function BlogPage() {
         </motion.div>
       </section>
 
-      {/* Blog Posts Section with enhanced cards */}
+      {/* Blog Posts Grid with animated cards */}
       <section className="px-4 sm:px-6 lg:px-8 pb-28 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
@@ -139,6 +149,7 @@ export default function BlogPage() {
               transition={{ duration: 0.5, delay: 0.1 * index }}
               className="bg-dark-300/40 backdrop-blur-sm rounded-xl overflow-hidden border border-violet-500/20 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/10 flex flex-col transform hover:-translate-y-1"
             >
+              {/* Blog post featured image */}
               <div className="aspect-[16/9] relative bg-dark-400 overflow-hidden group">
                 <div className="w-full h-full flex items-center justify-center text-dark-300 bg-gradient-to-br from-violet-400/20 to-green-400/20 group-hover:scale-105 transition-transform duration-700">
                   {/* Placeholder for actual images */}
@@ -146,6 +157,7 @@ export default function BlogPage() {
                     <span className="text-light-300/30 text-sm">Featured image</span>
                   </div>
                 </div>
+                {/* Read time indicator */}
                 <div className="absolute top-3 right-3 px-3 py-1 bg-dark-400/80 backdrop-blur-sm rounded-full">
                   <div className="flex items-center gap-1">
                     <Clock size={12} className="text-primary-200" />
@@ -153,13 +165,18 @@ export default function BlogPage() {
                   </div>
                 </div>
               </div>
+              
+              {/* Blog post content preview */}
               <div className="p-6 flex-1 flex flex-col">
+                {/* Category tag */}
                 <div className="flex items-center gap-2 mb-3">
                   <Tag size={14} className="text-primary-200" />
                   <span className="text-primary-200 text-xs font-medium">{post.category}</span>
                 </div>
+                {/* Title and excerpt */}
                 <h2 className="text-xl font-bold mb-3 text-light-100 line-clamp-2">{post.title}</h2>
                 <p className="text-light-100/70 mb-5 text-sm flex-1 line-clamp-3">{post.excerpt}</p>
+                {/* Author and publication date */}
                 <div className="flex items-center justify-between mt-2 pt-4 border-t border-violet-500/10">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full overflow-hidden bg-dark-200 relative">
@@ -180,6 +197,7 @@ export default function BlogPage() {
                   </div>
                 </div>
               </div>
+              {/* Read more link */}
               <Link href={`/blog/${post.id}`} className="block py-4 text-center text-primary-200 font-medium border-t border-violet-500/20 hover:bg-violet-500/10 transition-colors group">
                 <span className="inline-flex items-center">
                   Read Article 
@@ -190,7 +208,7 @@ export default function BlogPage() {
           ))}
         </div>
         
-        {/* Newsletter Signup with enhanced styling */}
+        {/* Newsletter Signup section */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -206,6 +224,7 @@ export default function BlogPage() {
           <p className="text-light-100/80 mb-8 max-w-md mx-auto">
             Get the latest interview tips, career advice, and MockMate updates delivered directly to your inbox.
           </p>
+          {/* Newsletter subscription form */}
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input 
               type="email" 

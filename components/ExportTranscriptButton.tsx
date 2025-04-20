@@ -11,6 +11,17 @@ interface ExportTranscriptButtonProps {
   interviewDate: string;
 }
 
+/**
+ * ExportTranscriptButton component to handle the export of interview transcripts.
+ * It allows users to download the transcript of the conversation.
+ * 
+ * @param {Array<{role: string, content: string}>} messages - The messages to export.
+ * @param {string} interviewRole - The role of the interviewee.
+ * @param {string} interviewDate - The date of the interview.
+ */
+
+
+
 const ExportTranscriptButton: React.FC<ExportTranscriptButtonProps> = ({
   messages,
   interviewRole,

@@ -195,6 +195,7 @@ export const feedbackSchema = z.object({
   finalAssessment: z.string(),
 });
 
+// Dummy data for interviews
 export const interviewCovers = [
   "/adobe.png",
   "/amazon.png",

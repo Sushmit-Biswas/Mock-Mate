@@ -36,6 +36,15 @@ const authFormSchema = (type: FormType) => {
 type FormType = "sign-in" | "sign-up";
 // Removed duplicate type definition
 
+/**
+ * AuthForm component for user authentication.
+ * It handles both sign-in and sign-up processes.
+ * 
+ * @param {FormType} type - The type of authentication form to display.
+ */
+
+
+
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter(); // Keep only one router initialization
   const [isLoading, setIsLoading] = React.useState(false); // Add loading state

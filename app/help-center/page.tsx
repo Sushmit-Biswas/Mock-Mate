@@ -21,8 +21,17 @@ import {
   X
 } from 'lucide-react';
 
+/**
+ * Help Center Page Component
+ * 
+ * Comprehensive support page featuring:
+ * - FAQ categories and links
+ * - Support article search
+ * - Contact form with validation
+ * - Live chat widget
+ */
 export default function HelpCenterPage() {
-  // Form state
+  // Form state management for contact form
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,7 +43,7 @@ export default function HelpCenterPage() {
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
   const [showChat, setShowChat] = useState(false);
 
-  // Support category cards data
+  // Support category cards data with icons and descriptions
   const supportCategories = [
     {
       title: "Getting Started",
@@ -74,7 +83,12 @@ export default function HelpCenterPage() {
     }
   ];
 
-  // Form handlers
+  /**
+   * Handles input changes in the contact form
+   * Updates form state and clears related error messages
+   * 
+   * @param e - Input change event
+   */
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData(prev => ({
@@ -91,6 +105,12 @@ export default function HelpCenterPage() {
     }
   };
 
+  /**
+   * Validates form inputs before submission
+   * Checks for empty fields and valid email format
+   * 
+   * @returns {boolean} - Whether the form is valid
+   */
   const validateForm = () => {
     const errors = {};
     if (!formData.name.trim()) errors.name = "Name is required";
@@ -105,6 +125,12 @@ export default function HelpCenterPage() {
     return Object.keys(errors).length === 0;
   };
 
+  /**
+   * Handles form submission
+   * Validates inputs, shows loading state, and displays success/error messages
+   * 
+   * @param e - Form submit event
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -112,7 +138,7 @@ export default function HelpCenterPage() {
     
     setIsSubmitting(true);
     
-    // Simulate API call
+    // Simulate API call with timeout
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       setSubmitStatus('success');
@@ -134,7 +160,7 @@ export default function HelpCenterPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200">
-      {/* Breadcrumb Navigation */}
+      {/* Breadcrumb Navigation for improved site navigation */}
       <div className="max-w-6xl mx-auto pt-6 px-4 md:px-6">
         <div className="flex items-center text-sm text-light-400">
           <Link href="/" className="flex items-center hover:text-primary-200 transition-colors">
@@ -146,7 +172,7 @@ export default function HelpCenterPage() {
         </div>
       </div>
       
-      {/* Hero Section */}
+      {/* Hero Section with search functionality */}
       <section className="relative pt-16 pb-12 px-4 md:px-6 lg:pt-20 lg:pb-16">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6 animate-fadeIn">
@@ -156,7 +182,7 @@ export default function HelpCenterPage() {
             Find the resources and support you need to get the most out of MockMate
           </p>
           
-          {/* Search Bar */}
+          {/* Search Bar for finding help articles */}
           <div className="max-w-lg mx-auto mb-4">
             <div className="relative">
               <input
@@ -182,7 +208,7 @@ export default function HelpCenterPage() {
             </div>
           </div>
           
-          {/* Common Questions */}
+          {/* Quick access links to common questions */}
           <div className="flex flex-wrap justify-center gap-3 mt-6">
             <Link href="/help-center/getting-started" className="px-4 py-2 rounded-full border border-violet-500/30 bg-dark-300/50 text-primary-200 hover:bg-violet-500/20 transition-colors duration-300">
               How to start my first interview?
@@ -197,7 +223,7 @@ export default function HelpCenterPage() {
         </div>
       </section>
 
-      {/* Support Categories Grid */}
+      {/* Support Categories Grid with visual navigation cards */}
       <section className="px-4 md:px-6 pb-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-semibold text-light-100 mb-8 text-center md:text-left">Support Categories</h2>
@@ -234,11 +260,12 @@ export default function HelpCenterPage() {
         </div>
       </section>
 
-      {/* Contact Support */}
+      {/* Contact Support section with multiple contact options and form */}
       <section className="px-4 md:px-6 pb-24">
         <div className="max-w-6xl mx-auto">
           <div className="bg-gradient-to-r from-dark-400/80 to-dark-300/80 rounded-xl p-8 md:p-10 border border-violet-500/30">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {/* Contact options column */}
               <div>
                 <h2 className="text-2xl md:text-3xl font-semibold mb-4 bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent">
                   Can't find what you need?
@@ -247,6 +274,7 @@ export default function HelpCenterPage() {
                   Our support team is here to help. Contact us through your preferred channel and we'll get back to you as soon as possible.
                 </p>
                 <div className="flex flex-col space-y-4">
+                  {/* Email contact info */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-400/40 transition-colors duration-300">
                     <div className="p-2 rounded-lg bg-dark-400/60">
                       <Mail size={20} className="text-violet-400" />
@@ -256,6 +284,7 @@ export default function HelpCenterPage() {
                       <p className="text-light-100">support@mockmate.com</p>
                     </div>
                   </div>
+                  {/* Phone contact info */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-400/40 transition-colors duration-300">
                     <div className="p-2 rounded-lg bg-dark-400/60">
                       <Phone size={20} className="text-green-400" />
@@ -266,6 +295,7 @@ export default function HelpCenterPage() {
                       <p className="text-xs text-light-400">Mon-Fri: 9AM-6PM IST</p>
                     </div>
                   </div>
+                  {/* Live chat info */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-400/40 transition-colors duration-300">
                     <div className="p-2 rounded-lg bg-dark-400/60">
                       <Headphones size={20} className="text-blue-400" />
@@ -278,10 +308,11 @@ export default function HelpCenterPage() {
                 </div>
               </div>
               
-              {/* Contact Form */}
+              {/* Contact Form with validation and feedback */}
               <div className="bg-dark-400/50 rounded-lg p-6 border border-violet-500/20">
                 <h3 className="text-xl font-semibold mb-4 text-light-100">Send us a message</h3>
                 
+                {/* Success message display */}
                 {submitStatus === 'success' && (
                   <div className="mb-4 p-3 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center">
                     <CheckCircle size={20} className="text-green-400 mr-2" />
@@ -292,6 +323,7 @@ export default function HelpCenterPage() {
                   </div>
                 )}
                 
+                {/* Error message display */}
                 {submitStatus === 'error' && (
                   <div className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg flex items-center">
                     <X size={20} className="text-red-400 mr-2" />
@@ -302,7 +334,9 @@ export default function HelpCenterPage() {
                   </div>
                 )}
                 
+                {/* Contact form with input validation */}
                 <form onSubmit={handleSubmit}>
+                  {/* Name input field */}
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="name">
                       Name <span className="text-red-400">*</span>
@@ -317,6 +351,7 @@ export default function HelpCenterPage() {
                     />
                     {formErrors.name && <p className="text-red-400 text-xs mt-1">{formErrors.name}</p>}
                   </div>
+                  {/* Email input field with validation */}
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="email">
                       Email <span className="text-red-400">*</span>
@@ -331,6 +366,7 @@ export default function HelpCenterPage() {
                     />
                     {formErrors.email && <p className="text-red-400 text-xs mt-1">{formErrors.email}</p>}
                   </div>
+                  {/* Issue type selection */}
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="issue">
                       Issue Type
@@ -348,6 +384,7 @@ export default function HelpCenterPage() {
                       <option>Other</option>
                     </select>
                   </div>
+                  {/* Message textarea */}
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="message">
                       Message <span className="text-red-400">*</span>
@@ -362,6 +399,7 @@ export default function HelpCenterPage() {
                     />
                     {formErrors.message && <p className="text-red-400 text-xs mt-1">{formErrors.message}</p>}
                   </div>
+                  {/* Submit button with loading state */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -381,7 +419,7 @@ export default function HelpCenterPage() {
         </div>
       </section>
       
-      {/* Sticky Chat Button */}
+      {/* Sticky Chat Button for quick support access */}
       <div className="fixed bottom-6 right-6 z-50">
         <button 
           onClick={() => setShowChat(!showChat)}
@@ -391,6 +429,7 @@ export default function HelpCenterPage() {
           <MessageCircle size={24} className="group-hover:scale-110 transition-transform" />
         </button>
         
+        {/* Chat popup that appears when chat button is clicked */}
         {showChat && (
           <div className="absolute bottom-16 right-0 w-80 p-4 bg-dark-300 rounded-lg shadow-lg border border-violet-500/30 animate-fadeIn">
             <div className="flex items-center justify-between mb-4">
