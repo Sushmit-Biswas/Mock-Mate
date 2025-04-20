@@ -67,7 +67,7 @@ const Agent = ({
         const transcriptLower = message.transcript.toLowerCase();
         const endKeywords = [
           "thank you for the call", "goodbye", "bye", "finished", "feedback", "see you", "good luck",
-          "that's all","end", "end the call", "end the meeting"
+          "that's all", "end the call", "end the meeting"
         ];
         
         // Check if the current call status is ACTIVE before disconnecting
