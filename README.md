@@ -271,7 +271,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 * Inspiration from similar AI interview platforms.
 * Thanks to the creators of the libraries and tools used.
-* Shoutout to the Hackathon organizers/community.
+* Shoutout to the Hack-Nite organizers.
 
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
