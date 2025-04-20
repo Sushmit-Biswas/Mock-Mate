@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createFeedback } from "@/lib/actions/general.action";
 import { AgentProps } from "@/types";
 import { Video, VideoOff } from "lucide-react"; 
+import EnhancedCallButton from './EnhancedCallButton';
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -398,25 +399,20 @@ const Agent = ({
 
       {/* Added vertical margin */}
       <div className="w-full flex justify-center my-12">
-        {callStatus !== "ACTIVE" ? (
-          <button className="relative btn-call" onClick={() => handleCall()}>
-            <span
-              className={cn(
-                "absolute animate-ping rounded-full opacity-75",
-                callStatus !== "CONNECTING" && "hidden"
-              )}
-            />
-
-            <span className="relative">
-              {callStatus === "INACTIVE" || callStatus === "FINISHED"
-                ? "Call"
-                : ". . ."}
-            </span>
-          </button>
+        {callStatus !== CallStatus.ACTIVE ? (
+          <EnhancedCallButton
+            onClick={handleCall}
+            isActive={callStatus === CallStatus.INACTIVE}
+            type="start"
+            className="mr-2"
+          />
         ) : (
-          <button className="btn-disconnect" onClick={() => handleDisconnect()}>
-            End
-          </button>
+          <EnhancedCallButton
+            onClick={handleDisconnect}
+            isActive={callStatus === CallStatus.ACTIVE}
+            type="end"
+            className="mr-2"
+          />
         )}
       </div>
     </>

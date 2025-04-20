@@ -41,22 +41,29 @@ const UserDashboard = ({ userInterviews, allInterviews, userName }: UserDashboar
     averageScore: 0,
   });
 
-  // Calculate stats from user interviews
+  // Calculate stats from ALL interviews (both user and others)
   useEffect(() => {
-    if (!userInterviews.length) return;
+    // Combine all interviews for comprehensive stats
+    const combinedInterviews = [...userInterviews, ...allInterviews.filter(i => 
+      !userInterviews.some(ui => ui.id === i.id)
+    )];
+    
+    if (!combinedInterviews.length) return;
 
-    // Basic interview stats
+    // Basic interview stats (stick to user interviews for personal stats)
     const completed = userInterviews.filter(interview => interview.feedback).length;
     const pending = userInterviews.filter(interview => !interview.feedback).length;
     const retake = userInterviews.filter(
       interview => interview.feedback && interview.feedback.totalScore < 70
     ).length;
     
-    const totalScore = userInterviews
+    // Calculate average score based on ALL interviews (both user and others)
+    const completedCombined = combinedInterviews.filter(interview => interview.feedback).length;
+    const totalScoreCombined = combinedInterviews
       .filter(interview => interview.feedback)
       .reduce((sum, interview) => sum + (interview.feedback?.totalScore || 0), 0);
     
-    const averageScore = completed > 0 ? Math.round(totalScore / completed) : 0;
+    const averageScore = completedCombined > 0 ? Math.round(totalScoreCombined / completedCombined) : 0;
     
     setInterviewStats({
       completed,
@@ -65,7 +72,11 @@ const UserDashboard = ({ userInterviews, allInterviews, userName }: UserDashboar
       averageScore,
     });
 
-    // Calculate skills progress
+    // Get all interviews with feedback (both user's and others) that have category scores
+    const interviewsWithFeedback = combinedInterviews
+      .filter(interview => interview.feedback?.categoryScores);
+    
+    // Calculate skills progress from ALL interviews with feedback (including other users)
     const skillScores = {};
     const skillColors = {
       "Communication Skills": "from-blue-500 to-blue-700",
@@ -75,7 +86,7 @@ const UserDashboard = ({ userInterviews, allInterviews, userName }: UserDashboar
       "Confidence and Clarity": "from-pink-500 to-pink-700",
     };
     
-    userInterviews.forEach(interview => {
+    interviewsWithFeedback.forEach(interview => {
       if (!interview.feedback?.categoryScores) return;
       
       interview.feedback.categoryScores.forEach(category => {
@@ -95,10 +106,10 @@ const UserDashboard = ({ userInterviews, allInterviews, userName }: UserDashboar
     
     setSkillsProgress(progressData);
 
-    // Identify top improvement areas
+    // Identify top improvement areas from ALL interviews
     const allSuggestions: ImprovementSuggestion[] = [];
     
-    userInterviews.forEach(interview => {
+    combinedInterviews.forEach(interview => {
       if (!interview.feedback?.areasForImprovement) return;
       
       interview.feedback.areasForImprovement.forEach(area => {
@@ -118,7 +129,7 @@ const UserDashboard = ({ userInterviews, allInterviews, userName }: UserDashboar
       .map(s => s.text);
     
     setImprovements(topSuggestions);
-  }, [userInterviews]);
+  }, [userInterviews, allInterviews]);
 
   // No data state
   if (!userInterviews.length) {
