@@ -21,6 +21,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Next.js](https://img.shields.io/badge/Next.js-14+-black?logo=next.js&logoColor=white)](https://nextjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3+-cyan?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
   [![Firebase](https://img.shields.io/badge/Firebase-SDK_v9+-orange?logo=firebase&logoColor=white)](https://firebase.google.com/)
   [![Vapi AI](https://img.shields.io/badge/Vapi-AI_Voice-lightgrey)](https://vapi.ai/)
@@ -109,7 +110,11 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
     </td>
   </tr>
   <tr>
-    <td colspan="2">
+    <td>
+      <h3>📊 Personalized Dashboard</h3>
+      View your interview stats, skill progress, and tailored improvement suggestions in an intuitive, visually appealing dashboard.
+    </td>
+    <td>
       <h3>🛠️ Customizable Settings</h3>
       Tailor interview difficulty, focus areas, and feedback depth to your specific needs and goals.
     </td>
@@ -124,6 +129,8 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/) <img src="https://cdn.worldvectorlogo.com/logos/tailwind-css-2.svg" alt="Tailwind CSS" width="24" height="24"/>
 * **Backend & Auth:** [Firebase (Auth, Firestore)](https://firebase.google.com/) <img src="https://firebase.google.com/static/images/brand-guidelines/logo-logomark.png" alt="Firebase" width="24" height="24"/>
 * **AI Voice Agent:** [Vapi](https://vapi.ai/) <img src="https://storage.googleapis.com/aiagents_1/agent-logos/1722190046010-bd1a05f5a5309646.png" alt="Vapi AI" width="24" height="24"/>
+* **AI Content Generation:** [Google Generative AI](https://ai.google.dev/) <img src="https://static.wikia.nocookie.net/logopedia/images/c/c2/Google_AI_Studio.svg/revision/latest/scale-to-width-down/200?cb=20241223140928" alt="Google Generative AI" width="24" height="24"/>
+* **Animations:** [Framer Motion](https://www.framer.com/motion/) <img src="https://user-images.githubusercontent.com/7850794/164965509-2a8dc49e-2ed7-4243-a2c9-481b03bbc31a.png" alt="Framer Motion" width="24" height="24"/>
 * **3D Graphics:** [Three.js](https://threejs.org/) <img src="https://canada1.discourse-cdn.com/flex035/uploads/threejs/optimized/2X/e/e4f86d2200d2d35c30f7b1494e96b9595ebc2751_2_1016x1024.png" alt="Three.js" width="24" height="24"/>
 * **UI Components:** [Shadcn/ui](https://ui.shadcn.com/) <img src="https://avatars.githubusercontent.com/u/139895814" alt="Shadcn UI" width="24" height="24"/>
 * **Deployment:** [Vercel](https://vercel.com/) <img src="https://assets.vercel.com/image/upload/v1691671420/repositories/vercel/logo.png" alt="Vercel" width="24" height="24"/>
@@ -258,6 +265,7 @@ Please ensure your code adheres to the project's coding standards and includes t
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
+
 
 ## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f64f_1f3fc/512.webp" width="25px" /> Acknowledgements
 
