@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   LifeBuoy, 
@@ -12,10 +12,28 @@ import {
   Phone,
   Video,
   Clock,
-  PenTool
+  PenTool,
+  Home,
+  ChevronRight,
+  MessageCircle,
+  Loader,
+  CheckCircle,
+  X
 } from 'lucide-react';
 
 export default function HelpCenterPage() {
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    issue: 'Technical Problem',
+    message: ''
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
+  const [showChat, setShowChat] = useState(false);
+
   // Support category cards data
   const supportCategories = [
     {
@@ -56,12 +74,82 @@ export default function HelpCenterPage() {
     }
   ];
 
+  // Form handlers
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+    
+    // Clear error when user starts typing
+    if (formErrors[id]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [id]: null
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.name.trim()) errors.name = "Name is required";
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      errors.email = "Email is invalid";
+    }
+    if (!formData.message.trim()) errors.message = "Message is required";
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
+    
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setSubmitStatus('success');
+      // Reset form after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        issue: 'Technical Problem',
+        message: ''
+      });
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      // Auto-hide status message after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200">
+      {/* Breadcrumb Navigation */}
+      <div className="max-w-6xl mx-auto pt-6 px-4 md:px-6">
+        <div className="flex items-center text-sm text-light-400">
+          <Link href="/" className="flex items-center hover:text-primary-200 transition-colors">
+            <Home size={14} className="mr-1" />
+            Home
+          </Link>
+          <ChevronRight size={14} className="mx-2" />
+          <span className="text-light-100">Help Center</span>
+        </div>
+      </div>
+      
       {/* Hero Section */}
-      <section className="relative pt-20 pb-12 px-4 md:px-6 lg:pt-24 lg:pb-16">
+      <section className="relative pt-16 pb-12 px-4 md:px-6 lg:pt-20 lg:pb-16">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6 animate-fadeIn">
             How Can We Help You?
           </h1>
           <p className="text-light-100/80 text-lg mb-8">
@@ -74,7 +162,8 @@ export default function HelpCenterPage() {
               <input
                 type="text"
                 placeholder="Search for help articles..."
-                className="w-full py-4 px-5 pr-12 rounded-lg bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                className="w-full py-4 px-5 pr-12 rounded-lg bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all duration-300"
+                aria-label="Search help articles"
               />
               <svg
                 className="absolute right-4 top-4 h-6 w-6 text-light-400"
@@ -111,12 +200,13 @@ export default function HelpCenterPage() {
       {/* Support Categories Grid */}
       <section className="px-4 md:px-6 pb-16">
         <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-semibold text-light-100 mb-8 text-center md:text-left">Support Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {supportCategories.map((category, index) => (
               <Link 
                 href={category.link} 
                 key={index}
-                className="bg-dark-300/50 rounded-xl p-6 border border-violet-500/20 hover:border-violet-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/10 group"
+                className="bg-dark-300/50 rounded-xl p-6 border border-violet-500/20 hover:border-violet-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/10 group hover:-translate-y-1"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="p-3 rounded-lg bg-dark-400/60 group-hover:bg-dark-400 transition-colors duration-300">
@@ -157,7 +247,7 @@ export default function HelpCenterPage() {
                   Our support team is here to help. Contact us through your preferred channel and we'll get back to you as soon as possible.
                 </p>
                 <div className="flex flex-col space-y-4">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-400/40 transition-colors duration-300">
                     <div className="p-2 rounded-lg bg-dark-400/60">
                       <Mail size={20} className="text-violet-400" />
                     </div>
@@ -166,23 +256,23 @@ export default function HelpCenterPage() {
                       <p className="text-light-100">support@mockmate.com</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-400/40 transition-colors duration-300">
                     <div className="p-2 rounded-lg bg-dark-400/60">
                       <Phone size={20} className="text-green-400" />
                     </div>
                     <div>
                       <p className="text-sm text-light-400">Phone Support</p>
-                      <p className="text-light-100">+1 (555) 123-4567</p>
-                      <p className="text-xs text-light-400">Mon-Fri: 9AM-6PM EST</p>
+                      <p className="text-light-100">+91 1234567890</p>
+                      <p className="text-xs text-light-400">Mon-Fri: 9AM-6PM IST</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-400/40 transition-colors duration-300">
                     <div className="p-2 rounded-lg bg-dark-400/60">
                       <Headphones size={20} className="text-blue-400" />
                     </div>
                     <div>
                       <p className="text-sm text-light-400">Live Chat</p>
-                      <p className="text-light-100">Available 24/7 for Premium Users</p>
+                      <p className="text-light-100">Available 24/7 for All Users</p>
                     </div>
                   </div>
                 </div>
@@ -191,28 +281,55 @@ export default function HelpCenterPage() {
               {/* Contact Form */}
               <div className="bg-dark-400/50 rounded-lg p-6 border border-violet-500/20">
                 <h3 className="text-xl font-semibold mb-4 text-light-100">Send us a message</h3>
-                <form>
+                
+                {submitStatus === 'success' && (
+                  <div className="mb-4 p-3 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center">
+                    <CheckCircle size={20} className="text-green-400 mr-2" />
+                    <span className="text-light-100">Your message has been sent successfully!</span>
+                    <button onClick={() => setSubmitStatus(null)} className="ml-auto text-light-400 hover:text-light-100">
+                      <X size={16} />
+                    </button>
+                  </div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <div className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg flex items-center">
+                    <X size={20} className="text-red-400 mr-2" />
+                    <span className="text-light-100">Failed to send message. Please try again.</span>
+                    <button onClick={() => setSubmitStatus(null)} className="ml-auto text-light-400 hover:text-light-100">
+                      <X size={16} />
+                    </button>
+                  </div>
+                )}
+                
+                <form onSubmit={handleSubmit}>
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="name">
-                      Name
+                      Name <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="text"
                       id="name"
-                      className="w-full py-2 px-3 rounded bg-dark-300 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={`w-full py-2 px-3 rounded bg-dark-300 text-light-100 border ${formErrors.name ? 'border-red-500' : 'border-violet-500/30'} focus:outline-none focus:ring-2 focus:ring-violet-500/50`}
                       placeholder="Your name"
                     />
+                    {formErrors.name && <p className="text-red-400 text-xs mt-1">{formErrors.name}</p>}
                   </div>
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="email">
-                      Email
+                      Email <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="email"
                       id="email"
-                      className="w-full py-2 px-3 rounded bg-dark-300 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`w-full py-2 px-3 rounded bg-dark-300 text-light-100 border ${formErrors.email ? 'border-red-500' : 'border-violet-500/30'} focus:outline-none focus:ring-2 focus:ring-violet-500/50`}
                       placeholder="Your email"
                     />
+                    {formErrors.email && <p className="text-red-400 text-xs mt-1">{formErrors.email}</p>}
                   </div>
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="issue">
@@ -220,6 +337,8 @@ export default function HelpCenterPage() {
                     </label>
                     <select
                       id="issue"
+                      value={formData.issue}
+                      onChange={handleInputChange}
                       className="w-full py-2 px-3 rounded bg-dark-300 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                     >
                       <option>Technical Problem</option>
@@ -231,20 +350,29 @@ export default function HelpCenterPage() {
                   </div>
                   <div className="mb-4">
                     <label className="block text-light-100/80 text-sm mb-2" htmlFor="message">
-                      Message
+                      Message <span className="text-red-400">*</span>
                     </label>
                     <textarea
                       id="message"
-                      className="w-full py-2 px-3 rounded bg-dark-300 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className={`w-full py-2 px-3 rounded bg-dark-300 text-light-100 border ${formErrors.message ? 'border-red-500' : 'border-violet-500/30'} focus:outline-none focus:ring-2 focus:ring-violet-500/50`}
                       rows={4}
                       placeholder="Describe your issue or question..."
                     />
+                    {formErrors.message && <p className="text-red-400 text-xs mt-1">{formErrors.message}</p>}
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-2.5 bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-opacity text-white font-medium rounded"
+                    disabled={isSubmitting}
+                    className="w-full py-2.5 bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-all text-white font-medium rounded flex items-center justify-center"
                   >
-                    Submit
+                    {isSubmitting ? (
+                      <>
+                        <Loader size={18} className="animate-spin mr-2" />
+                        Sending...
+                      </>
+                    ) : "Submit"}
                   </button>
                 </form>
               </div>
@@ -252,6 +380,32 @@ export default function HelpCenterPage() {
           </div>
         </div>
       </section>
+      
+      {/* Sticky Chat Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button 
+          onClick={() => setShowChat(!showChat)}
+          className="p-4 rounded-full bg-violet-500 hover:bg-violet-600 text-white shadow-lg shadow-violet-500/30 flex items-center justify-center transition-all duration-300 group"
+          aria-label="Chat with support"
+        >
+          <MessageCircle size={24} className="group-hover:scale-110 transition-transform" />
+        </button>
+        
+        {showChat && (
+          <div className="absolute bottom-16 right-0 w-80 p-4 bg-dark-300 rounded-lg shadow-lg border border-violet-500/30 animate-fadeIn">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="font-medium text-light-100">Live Support</h4>
+              <button onClick={() => setShowChat(false)} className="text-light-400 hover:text-light-100">
+                <X size={16} />
+              </button>
+            </div>
+            <p className="text-light-100/80 text-sm mb-4">Connect with our support team instantly.</p>
+            <button className="w-full py-2 bg-violet-500 hover:bg-violet-600 text-white rounded font-medium transition-colors">
+              Start Chat
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

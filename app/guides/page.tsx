@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Code, 
@@ -10,10 +10,16 @@ import {
   ArrowRightIcon,
   Star,
   Clock,
-  TrendingUp
+  TrendingUp,
+  Search,
+  Home,
+  ChevronRight
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function GuidesPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  
   // Guide category data
   const guideCategories = [
     {
@@ -166,155 +172,222 @@ export default function GuidesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200">
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-12 px-4 md:px-6 lg:pt-24 lg:pb-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6">
+      {/* Breadcrumb Navigation */}
+      <div className="max-w-6xl mx-auto pt-6 px-4 md:px-6">
+        <div className="flex items-center text-sm text-light-400">
+          <Link href="/" className="flex items-center hover:text-primary-200 transition-colors">
+            <Home size={14} className="mr-1" />
+            Home
+          </Link>
+          <ChevronRight size={14} className="mx-2" />
+          <span className="text-light-100">Guides</span>
+        </div>
+      </div>
+      
+      {/* Hero Section with enhanced styling */}
+      <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 lg:pt-24 lg:pb-20">
+        {/* Decorative elements */}
+        <div className="absolute top-20 right-10 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-10 left-10 w-72 h-72 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center relative z-10"
+        >
+          <span className="inline-block py-1 px-3 rounded-full bg-violet-500/10 text-violet-400 text-sm font-medium mb-4">
+            Expert Resources
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6">
             Interview Guides
           </h1>
-          <p className="text-light-100/80 text-lg mb-8">
+          <p className="text-light-100/80 text-lg md:text-xl mb-10">
             Expert resources to help you prepare for and excel in any interview
           </p>
           
-          {/* Search Bar */}
-          <div className="max-w-lg mx-auto mb-8">
+          {/* Enhanced Search Bar */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="max-w-xl mx-auto mb-8"
+          >
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search guides..."
-                className="w-full py-3 px-5 pr-12 rounded-lg bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full py-4 px-6 pr-14 rounded-xl bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50 shadow-lg shadow-dark-400/10"
               />
-              <svg
-                className="absolute right-4 top-3.5 h-5 w-5 text-light-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+              <div className="absolute right-4 top-4 text-light-400">
+                <Search size={20} />
+              </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* Featured Guides */}
-      <section className="px-4 md:px-6 pb-16">
+      {/* Featured Guides with enhanced styling */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-20">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-semibold mb-6 text-light-100">Featured Guides</h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-8"
+          >
+            <div className="p-2 rounded-lg bg-violet-500/20">
+              <Star size={20} className="text-violet-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-light-100">Featured Guides</h2>
+          </motion.div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {featuredGuides.map((guide, index) => (
-              <Link 
-                href={guide.path} 
+              <motion.div
                 key={index}
-                className="bg-dark-300/50 rounded-xl overflow-hidden border border-violet-500/20 hover:border-violet-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/10 flex flex-col h-full"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
               >
-                <div className="h-48 bg-gradient-to-r from-violet-500/20 to-green-500/20 relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-light-300/30 text-sm">Featured image</span>
+                <Link 
+                  href={guide.path} 
+                  className="bg-dark-300/40 backdrop-blur-sm rounded-xl overflow-hidden border border-violet-500/20 hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/10 flex flex-col h-full transform hover:-translate-y-1"
+                >
+                  <div className="h-56 bg-gradient-to-r from-violet-500/20 to-green-500/20 relative overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-light-300/30 text-sm">Featured image</span>
+                    </div>
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-dark-300/80 to-transparent"></div>
                   </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="bg-violet-500/20 text-violet-400 text-xs py-1 px-3 rounded-full">Featured</span>
-                    <span className="flex items-center gap-1 text-light-400 text-sm">
-                      <Clock size={14} />
-                      {guide.duration}
-                    </span>
+                  <div className="p-7 flex-1 flex flex-col">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="bg-violet-500/20 text-violet-400 text-xs py-1.5 px-4 rounded-full font-medium">Featured</span>
+                      <span className="flex items-center gap-1.5 text-light-400 text-sm">
+                        <Clock size={14} />
+                        {guide.duration}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4 text-light-100">{guide.title}</h3>
+                    <p className="text-light-100/70 text-sm mb-5 flex-1">{guide.description}</p>
+                    <div className="flex items-center text-primary-200 font-medium group">
+                      Read guide
+                      <ArrowRightIcon size={16} className="ml-1.5 transition-transform group-hover:translate-x-1" />
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-light-100">{guide.title}</h3>
-                  <p className="text-light-100/70 text-sm mb-4 flex-1">{guide.description}</p>
-                  <div className="flex items-center text-primary-200 font-medium">
-                    Read guide
-                    <ArrowRightIcon size={16} className="ml-1" />
-                  </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Guide Categories */}
+      {/* Guide Categories with enhanced styling */}
       {guideCategories.map((category, i) => (
-        <section key={i} className="px-4 md:px-6 pb-16">
+        <motion.section 
+          key={i} 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="px-4 sm:px-6 lg:px-8 pb-20"
+        >
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-dark-400/60">
+              <div className="p-2.5 rounded-lg bg-dark-400/60">
                 {category.icon}
               </div>
               <h2 className="text-2xl font-semibold text-light-100">{category.title}</h2>
             </div>
-            <p className="text-light-100/80 mb-8 max-w-2xl">{category.description}</p>
+            <p className="text-light-100/80 mb-10 max-w-2xl text-lg">{category.description}</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {category.guides.map((guide, index) => (
-                <Link 
-                  href={guide.path} 
+                <motion.div
                   key={index}
-                  className={`bg-dark-300/30 rounded-lg p-5 border ${category.color} hover:border-opacity-50 transition-all duration-300 flex flex-col h-full`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
                 >
-                  <div className="flex justify-between mb-2">
-                    <span className="bg-dark-400/60 text-light-100/80 text-xs py-1 px-2 rounded">
-                      {guide.difficulty}
-                    </span>
-                    <span className="flex items-center gap-1 text-light-400 text-xs">
-                      <Clock size={12} />
-                      {guide.timeToRead}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-medium mb-2 text-light-100">{guide.title}</h3>
-                  <p className="text-light-100/70 text-sm mb-3 flex-1">{guide.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-primary-200 text-sm font-medium">Read more</span>
-                    {guide.isPopular && (
-                      <span className="flex items-center gap-1 text-amber-400 text-xs">
-                        <TrendingUp size={12} />
-                        Popular
+                  <Link 
+                    href={guide.path} 
+                    className={`bg-dark-300/40 backdrop-blur-sm rounded-xl p-6 border ${category.color} hover:border-opacity-50 transition-all duration-300 flex flex-col h-full hover:shadow-lg hover:shadow-violet-500/5 transform hover:-translate-y-1`}
+                  >
+                    <div className="flex justify-between mb-3">
+                      <span className="bg-dark-400/60 text-light-100/90 text-xs py-1 px-3 rounded-full">
+                        {guide.difficulty}
                       </span>
-                    )}
-                  </div>
-                </Link>
+                      <span className="flex items-center gap-1.5 text-light-400 text-xs">
+                        <Clock size={12} />
+                        {guide.timeToRead}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-3 text-light-100">{guide.title}</h3>
+                    <p className="text-light-100/70 text-sm mb-4 flex-1">{guide.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-primary-200 text-sm font-medium group-hover:text-violet-400 flex items-center gap-1">
+                        Read more
+                        <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                      </span>
+                      {guide.isPopular && (
+                        <span className="flex items-center gap-1 text-amber-400 text-xs">
+                          <TrendingUp size={12} />
+                          Popular
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
             
-            <div className="mt-6 text-right">
-              <Link href={`/guides/${category.title.toLowerCase().replace(/\s+/g, '-')}`} className="text-primary-200 hover:text-violet-400 transition-colors flex items-center justify-end gap-1 text-sm font-medium">
+            <div className="mt-8 text-right">
+              <Link 
+                href={`/guides/${category.title.toLowerCase().replace(/\s+/g, '-')}`} 
+                className="text-primary-200 hover:text-violet-400 transition-colors flex items-center justify-end gap-1.5 text-sm font-medium group"
+              >
                 View all {category.title} guides
-                <ArrowRightIcon size={16} />
+                <ArrowRightIcon size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
-        </section>
+        </motion.section>
       ))}
 
-      {/* Newsletter */}
-      <section className="px-4 md:px-6 pb-24">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-r from-dark-400/80 to-dark-300/80 rounded-xl p-8 md:p-10 border border-violet-500/30 text-center">
+      {/* Newsletter with enhanced styling */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-28">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="bg-gradient-to-r from-dark-400/90 to-dark-300/90 rounded-2xl p-10 border border-violet-500/30 text-center shadow-xl backdrop-blur-sm">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-violet-500/20 flex items-center justify-center">
+              <span className="text-3xl">✉️</span>
+            </div>
             <h2 className="text-2xl md:text-3xl font-semibold mb-4 bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent">
               Get Interview Guides Delivered to Your Inbox
             </h2>
-            <p className="text-light-100/80 mb-6 max-w-2xl mx-auto">
+            <p className="text-light-100/80 mb-8 max-w-2xl mx-auto text-lg">
               Subscribe to our newsletter for the latest interview tips, exclusive guides, and early access to new resources.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="bg-dark-100/70 text-light-100 border border-violet-500/30 rounded-lg px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                className="bg-dark-100/70 text-light-100 border border-violet-500/30 rounded-lg px-5 py-3.5 w-full focus:outline-none focus:ring-2 focus:ring-violet-500/50 shadow-inner"
               />
-              <button className="bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-opacity text-white font-medium py-2.5 px-6 rounded-lg whitespace-nowrap">
+              <button className="bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-opacity text-white font-medium py-3.5 px-8 rounded-lg whitespace-nowrap shadow-lg hover:shadow-violet-500/30">
                 Subscribe
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

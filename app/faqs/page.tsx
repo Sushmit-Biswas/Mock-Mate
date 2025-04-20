@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Home, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 // FAQ Item component with enhanced animations and styling
 const FAQItem = ({ question, answer }) => {
@@ -187,96 +188,110 @@ export default function FAQsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 py-20 px-4 md:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header with improved spacing */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-light-100/80 max-w-2xl mx-auto text-lg">
-            Find answers to common questions about MockMate's interview simulation platform, 
-            resume checker, and other features.
-          </p>
-        </motion.div>
-
-        {/* Search Bar with enhanced styling */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-          className="mb-16"
-        >
-          <div className="max-w-lg mx-auto">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search for questions..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full py-4 px-5 pr-12 rounded-xl bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50 shadow-lg"
-              />
-              <svg
-                className="absolute right-4 top-4 h-5 w-5 text-light-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* FAQ Categories with search results messaging */}
-        {filteredFaqData.length === 0 ? (
-          <div className="text-center py-12">
-            <h3 className="text-xl text-light-100 mb-2">No results found</h3>
-            <p className="text-light-100/70">Try searching with different keywords</p>
-          </div>
-        ) : (
-          filteredFaqData.map((category, index) => (
-            <FAQCategory
-              key={index}
-              title={category.category}
-              faqs={category.faqs}
-              iconEmoji={category.iconEmoji}
-            />
-          ))
-        )}
-
-        {/* Still Have Questions - enhanced styling */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-20 text-center p-10 rounded-xl bg-gradient-to-r from-dark-400/80 to-dark-300/80 border border-violet-500/30 shadow-xl backdrop-blur-sm"
-        >
-          <div className="flex justify-center mb-4">
-            <span className="text-3xl" role="img" aria-label="question">❓</span>
-          </div>
-          <h2 className="text-2xl font-bold mb-4 text-light-100">Still Have Questions?</h2>
-          <p className="text-light-100/80 mb-8 max-w-lg mx-auto">
-            Can't find what you're looking for? Reach out to our support team and we'll get back to you as soon as possible.
-          </p>
-          <a
-            href="/help-center"
-            className="inline-block bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-opacity text-white font-medium py-4 px-8 rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all"
+    <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200">
+      {/* Breadcrumb Navigation */}
+      <div className="max-w-6xl mx-auto pt-6 px-4 md:px-6">
+        <div className="flex items-center text-sm text-light-400">
+          <Link href="/" className="flex items-center hover:text-primary-200 transition-colors">
+            <Home size={14} className="mr-1" />
+            Home
+          </Link>
+          <ChevronRight size={14} className="mx-2" />
+          <span className="text-light-100">FAQs</span>
+        </div>
+      </div>
+      
+      <div className="py-20 px-4 md:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Header with improved spacing */}
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
           >
-            Contact Support
-          </a>
-        </motion.div>
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6">
+              Frequently Asked Questions
+            </h1>
+            <p className="text-light-100/80 max-w-2xl mx-auto text-lg">
+              Find answers to common questions about MockMate's interview simulation platform, 
+              resume checker, and other features.
+            </p>
+          </motion.div>
+
+          {/* Search Bar with enhanced styling */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="mb-16"
+          >
+            <div className="max-w-lg mx-auto">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search for questions..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full py-4 px-5 pr-12 rounded-xl bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50 shadow-lg"
+                />
+                <svg
+                  className="absolute right-4 top-4 h-5 w-5 text-light-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* FAQ Categories with search results messaging */}
+          {filteredFaqData.length === 0 ? (
+            <div className="text-center py-12">
+              <h3 className="text-xl text-light-100 mb-2">No results found</h3>
+              <p className="text-light-100/70">Try searching with different keywords</p>
+            </div>
+          ) : (
+            filteredFaqData.map((category, index) => (
+              <FAQCategory
+                key={index}
+                title={category.category}
+                faqs={category.faqs}
+                iconEmoji={category.iconEmoji}
+              />
+            ))
+          )}
+
+          {/* Still Have Questions - enhanced styling */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-20 text-center p-10 rounded-xl bg-gradient-to-r from-dark-400/80 to-dark-300/80 border border-violet-500/30 shadow-xl backdrop-blur-sm"
+          >
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl" role="img" aria-label="question">❓</span>
+            </div>
+            <h2 className="text-2xl font-bold mb-4 text-light-100">Still Have Questions?</h2>
+            <p className="text-light-100/80 mb-8 max-w-lg mx-auto">
+              Can't find what you're looking for? Reach out to our support team and we'll get back to you as soon as possible.
+            </p>
+            <a
+              href="/help-center"
+              className="inline-block bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-opacity text-white font-medium py-4 px-8 rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all"
+            >
+              Contact Support
+            </a>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
