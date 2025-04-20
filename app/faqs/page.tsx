@@ -1,79 +1,99 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// FAQ Item component with toggle functionality
+// FAQ Item component with enhanced animations and styling
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-violet-500/20 last:border-b-0">
+    <div className="border-b border-violet-500/20 last:border-b-0 group">
       <button
-        className="flex justify-between items-center w-full py-5 px-1 text-left"
+        className="flex justify-between items-center w-full py-6 px-4 text-left hover:bg-dark-200/30 transition-colors rounded-t-lg"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
       >
-        <h3 className="text-lg font-medium text-light-100">{question}</h3>
-        <div className="text-violet-400">
-          {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+        <h3 className="text-lg font-medium text-light-100 group-hover:text-primary-200 transition-colors">{question}</h3>
+        <div className={`text-violet-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
+          <ChevronDown size={20} />
         </div>
       </button>
-      <div 
-        className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-96 pb-5 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="prose prose-invert max-w-none text-light-100/80">
-          <p>{answer}</p>
-        </div>
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="prose prose-invert max-w-none text-light-100/80 px-4 pb-6">
+              <p>{answer}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-// FAQ category section
-const FAQCategory = ({ title, faqs }) => {
+// FAQ category section with enhanced styling
+const FAQCategory = ({ title, faqs, iconEmoji }) => {
   return (
-    <div className="mb-12">
-      <h2 className="text-2xl font-semibold mb-6 bg-gradient-to-r from-violet-400 to-green-400 bg-clip-text text-transparent">
-        {title}
-      </h2>
-      <div className="bg-dark-300/50 rounded-xl border border-violet-500/20">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="mb-14"
+    >
+      <div className="flex items-center gap-3 mb-6">
+        <span className="text-2xl" role="img" aria-label={title}>{iconEmoji}</span>
+        <h2 className="text-2xl font-semibold bg-gradient-to-r from-violet-400 to-green-400 bg-clip-text text-transparent">
+          {title}
+        </h2>
+      </div>
+      <div className="bg-dark-300/50 rounded-xl border border-violet-500/20 shadow-xl shadow-dark-400/10 backdrop-blur-sm">
         {faqs.map((faq, index) => (
           <FAQItem key={index} question={faq.question} answer={faq.answer} />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default function FAQsPage() {
-  // FAQ data organized by categories
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredFaqData, setFilteredFaqData] = useState([]);
+  
+  // FAQ data organized by categories - updated to match README
   const faqData = [
     {
       category: "General Questions",
+      iconEmoji: "🤔",
       faqs: [
         {
           question: "What is MockMate?",
           answer: "MockMate is an AI-powered interview preparation platform that provides realistic mock interviews with instant feedback. Our AI interviewer asks questions tailored to your target role and provides constructive criticism to help you improve your interviewing skills."
         },
         {
-          question: "Do I need to create an account to use MockMate?",
-          answer: "Yes, you need to create a free account to access our interview simulations and save your progress. Creating an account allows you to track your performance over time and receive personalized recommendations."
+          question: "Is MockMate free to use?",
+          answer: "Yes, MockMate is currently free for use for all users. Enjoy full access to its features without any cost, with premium options potentially available in the future."
         },
         {
           question: "What makes MockMate different from other interview prep tools?",
           answer: "MockMate offers realistic voice-based conversations with AI rather than just text prompts. Our platform provides detailed feedback on your answers, including content analysis, delivery assessment, and specific improvement suggestions. We also offer a resume checker tool to optimize your job applications."
         },
         {
-          question: "Is MockMate free to use?",
-          answer: "MockMate offers both free and premium plans. The free plan gives you limited access to interview types and feedback features. Our premium plans unlock all interview types, unlimited sessions, detailed analytics, and priority support."
+          question: "Do I need to create an account to use MockMate?",
+          answer: "Yes, you need to create a free account to access our interview simulations and save your progress. Creating an account allows you to track your performance over time and receive personalized recommendations."
         }
       ]
     },
     {
       category: "Technical Details",
+      iconEmoji: "⚙️",
       faqs: [
         {
           question: "What browsers does MockMate support?",
@@ -85,7 +105,7 @@ export default function FAQsPage() {
         },
         {
           question: "How does MockMate's AI understand and evaluate my answers?",
-          answer: "MockMate uses advanced natural language processing models to analyze your responses based on content relevance, structure, clarity, and technical accuracy (for technical interviews). The AI is trained on thousands of successful interview responses and industry best practices."
+          answer: "MockMate leverages highly advanced and highly sophisticated Gemini AI models, trusted by everyone, to thoroughly analyze your responses. These models assess content relevance, structure, clarity, and technical accuracy to provide detailed, personalized feedback."
         },
         {
           question: "Can I use MockMate on mobile devices?",
@@ -95,6 +115,7 @@ export default function FAQsPage() {
     },
     {
       category: "Interview Preparation",
+      iconEmoji: "🎯",
       faqs: [
         {
           question: "What types of interviews does MockMate support?",
@@ -109,13 +130,14 @@ export default function FAQsPage() {
           answer: "A standard interview session typically lasts between 15-30 minutes, depending on the interview type and your response length. You can also configure shorter practice sessions focusing on specific question types."
         },
         {
-          question: "Can I pause an interview session and resume later?",
-          answer: "Yes, premium users can pause interviews and resume them later. Free users must complete their sessions in one sitting or restart from the beginning."
+          question: "Where can I find interview guides and resources?",
+          answer: "MockMate provides comprehensive resources covering common questions, strategies, and industry-specific tips in our Interview Guides section. These guides are designed to help you understand what recruiters are looking for and how to structure effective responses."
         }
       ]
     },
     {
       category: "Resume Checker",
+      iconEmoji: "📝",
       faqs: [
         {
           question: "How does the Resume Checker work?",
@@ -137,31 +159,70 @@ export default function FAQsPage() {
     }
   ];
 
+  // Filter FAQs based on search query
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredFaqData(faqData);
+      return;
+    }
+
+    const filtered = faqData.map(category => {
+      const filteredFaqs = category.faqs.filter(faq => 
+        faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      
+      return {
+        ...category,
+        faqs: filteredFaqs
+      };
+    }).filter(category => category.faqs.length > 0);
+    
+    setFilteredFaqData(filtered);
+  }, [searchQuery]);
+
+  // Initialize filtered data
+  useEffect(() => {
+    setFilteredFaqData(faqData);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 py-16 px-4 md:px-6">
+    <div className="min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 py-20 px-4 md:px-8">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-4">
+        {/* Header with improved spacing */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-violet-500 bg-clip-text text-transparent mb-6">
             Frequently Asked Questions
           </h1>
-          <p className="text-light-100/80 max-w-2xl mx-auto">
+          <p className="text-light-100/80 max-w-2xl mx-auto text-lg">
             Find answers to common questions about MockMate's interview simulation platform, 
             resume checker, and other features.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Search Bar */}
-        <div className="mb-12">
+        {/* Search Bar with enhanced styling */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="mb-16"
+        >
           <div className="max-w-lg mx-auto">
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search for questions..."
-                className="w-full py-3 px-5 pr-12 rounded-lg bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full py-4 px-5 pr-12 rounded-xl bg-dark-300/50 text-light-100 border border-violet-500/30 focus:outline-none focus:ring-2 focus:ring-violet-500/50 shadow-lg"
               />
               <svg
-                className="absolute right-4 top-3.5 h-5 w-5 text-light-400"
+                className="absolute right-4 top-4 h-5 w-5 text-light-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -176,30 +237,46 @@ export default function FAQsPage() {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* FAQ Categories */}
-        {faqData.map((category, index) => (
-          <FAQCategory
-            key={index}
-            title={category.category}
-            faqs={category.faqs}
-          />
-        ))}
+        {/* FAQ Categories with search results messaging */}
+        {filteredFaqData.length === 0 ? (
+          <div className="text-center py-12">
+            <h3 className="text-xl text-light-100 mb-2">No results found</h3>
+            <p className="text-light-100/70">Try searching with different keywords</p>
+          </div>
+        ) : (
+          filteredFaqData.map((category, index) => (
+            <FAQCategory
+              key={index}
+              title={category.category}
+              faqs={category.faqs}
+              iconEmoji={category.iconEmoji}
+            />
+          ))
+        )}
 
-        {/* Still Have Questions */}
-        <div className="mt-16 text-center p-8 rounded-xl bg-gradient-to-r from-dark-400/80 to-dark-300/80 border border-violet-500/30">
-          <h2 className="text-2xl font-bold mb-3">Still Have Questions?</h2>
-          <p className="text-light-100/80 mb-6 max-w-lg mx-auto">
+        {/* Still Have Questions - enhanced styling */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-20 text-center p-10 rounded-xl bg-gradient-to-r from-dark-400/80 to-dark-300/80 border border-violet-500/30 shadow-xl backdrop-blur-sm"
+        >
+          <div className="flex justify-center mb-4">
+            <span className="text-3xl" role="img" aria-label="question">❓</span>
+          </div>
+          <h2 className="text-2xl font-bold mb-4 text-light-100">Still Have Questions?</h2>
+          <p className="text-light-100/80 mb-8 max-w-lg mx-auto">
             Can't find what you're looking for? Reach out to our support team and we'll get back to you as soon as possible.
           </p>
           <a
             href="/help-center"
-            className="inline-block bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-opacity text-white font-medium py-3 px-6 rounded-lg"
+            className="inline-block bg-gradient-to-r from-violet-500 to-primary-200 hover:opacity-90 transition-opacity text-white font-medium py-4 px-8 rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all"
           >
             Contact Support
           </a>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
