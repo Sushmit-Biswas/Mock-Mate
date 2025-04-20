@@ -1,25 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import InterviewList from "@/components/InterviewList"; // Import the list component
-import TestimonialsSection from "@/components/TestimonialsSection"; // Import the new testimonials component
-import InteractiveRobot from "@/components/InteractiveRobot"; // Import the 3D robot component
+import InterviewList from "@/components/InterviewList";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import InteractiveRobot from "@/components/InteractiveRobot";
+import StatisticsSection from "@/components/StatisticsSection"; // Add new import
+import UserDashboard from "@/components/UserDashboard"; // Add new import
 import { getCurrentUser } from "@/lib/actions/auth.action";
 import {
   getInterviewsByUserId,
   getLatestInterviews,
-  getFeedbackByInterviewId, // Import feedback action
+  getFeedbackByInterviewId,
 } from "@/lib/actions/general.action";
-import { Interview, Feedback } from "@/types"; // Import base types
-import { getTechLogos } from "@/lib/utils"; // Import getTechLogos
-import { TechIconData } from "@/components/DisplayTechIcons"; // Import icon type
+import { Interview, Feedback } from "@/types";
+import { getTechLogos } from "@/lib/utils";
+import { TechIconData } from "@/components/DisplayTechIcons";
 
 import { redirect } from "next/navigation";
 
 // Define a type for interview + feedback
 type InterviewWithFeedback = Interview & { feedback: Feedback | null };
 // Define a type for the final combined data including icons
-export type InterviewWithDetails = InterviewWithFeedback & { icons: TechIconData[] }; // Export if needed elsewhere, otherwise remove export
+export type InterviewWithDetails = InterviewWithFeedback & { icons: TechIconData[] };
 
 async function Home() {
   const user = await getCurrentUser();
@@ -95,6 +97,15 @@ async function Home() {
         </div>
       </section>
 
+      {/* Add User Dashboard Section */}
+      <section className="mt-10 mb-10">
+        <UserDashboard 
+          userInterviews={userInterviewsWithDetails}
+          allInterviews={allInterviewsWithDetails}
+          userName={user.name}
+        />
+      </section>
+
       {/* Only render "My Interviews" section if there are interviews */}
       {userInterviewsWithDetails.length > 0 && (
         <InterviewList
@@ -112,8 +123,11 @@ async function Home() {
           emptyMessage="There are no interviews available"
         />
       )}
-      
-      {/* Add the new testimonials section */}
+
+      {/* Add Statistics Section before testimonials */}
+      <StatisticsSection />
+
+      {/* Add the testimonials section */}
       <TestimonialsSection />
     </>
   );
