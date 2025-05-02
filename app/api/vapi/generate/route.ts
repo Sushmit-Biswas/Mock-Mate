@@ -21,7 +21,7 @@ export async function POST(request: Request) {
         Return the questions formatted like this:
         ["Question 1", "Question 2", "Question 3"]
         
-        Thank you! <3
+        Thank you so much!
     `,
     });
 
