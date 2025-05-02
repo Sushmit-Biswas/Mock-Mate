@@ -269,9 +269,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f64f_1f3fc/512.webp" width="25px" /> Acknowledgements
 
-* Inspiration from similar AI interview platforms.
-* Thanks to the creators of the libraries and tools used.
-* Shoutout to the Hack-Nite organizers.
+* Inspired by [Adrian Hajdin's AI Mock Interview project](https://github.com/adrianhajdin/ai_mock_interviews).
+* Appreciation to all users who provide feedback and help improve MockMate.
 
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
