@@ -64,6 +64,34 @@ With a focus on enhancing accessibility and elevating user experience, MockMate 
 
 ---
 
+## 📸 Screenshots
+
+Quick glance at the app UI — screenshots live in the `app-screenshots/` folder.
+
+<p align="center">
+  <img src="app-screenshots/landing.png" alt="Landing" width="320" />
+  <img src="app-screenshots/hero.png" alt="Hero" width="320" />
+  <img src="app-screenshots/signup.png" alt="Sign Up" width="320" />
+</p>
+
+<p align="center">
+  <img src="app-screenshots/signin.png" alt="Sign In" width="320" />
+  <img src="app-screenshots/dashboard.png" alt="Dashboard" width="320" />
+  <img src="app-screenshots/create-interview.png" alt="Create Interview" width="320" />
+</p>
+
+<p align="center">
+  <img src="app-screenshots/interview-page.png" alt="Interview" width="320" />
+  <img src="app-screenshots/feedback.png" alt="Feedback" width="320" />
+  <img src="app-screenshots/resume-uploader.png" alt="Resume Uploader" width="320" />
+</p>
+
+<p align="center">
+  <img src="app-screenshots/resume-results.png" alt="Resume Results" width="320" />
+  <img src="app-screenshots/profile.png" alt="Profile" width="320" />
+  <img src="app-screenshots/mobile-nav.png" alt="Mobile" width="320" />
+</p>
+
 ## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/26a1/512.webp" width="25px" /> Key Features
 
 
